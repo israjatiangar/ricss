@@ -1,0 +1,47 @@
+@layer Reset {
+	*,
+	*:is(::before, ::after) {
+		box-sizing: border-box;
+	}
+	*:not(dialog) {
+		margin: 0;
+	}
+	body {
+		-webkit-font-smoothing: antialiased;
+		line-height: 1.5;
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		hyphens: auto;
+		overflow-wrap: break-word;
+		text-wrap: balance;
+	}
+	p {
+		hyphens: auto;
+		overflow-wrap: break-word;
+	}
+	input,
+	button,
+	textarea,
+	select {
+		font: inherit;
+		font-size: 1rem;
+	}
+	img,
+	picture,
+	video,
+	canvas,
+	svg {
+		display: block;
+		max-width: 100%;
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		html {
+			interpolate-size: allow-keywords;
+		}
+	}
+}
