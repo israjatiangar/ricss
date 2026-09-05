@@ -1,6 +1,5 @@
 @layer Reset {
-	*,
-	*:is(::before, ::after) {
+	:is(*, *::before, *::after) {
 		box-sizing: border-box;
 	}
 	*:not(dialog) {
@@ -10,38 +9,54 @@
 		-webkit-font-smoothing: antialiased;
 		line-height: 1.5;
 	}
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
+	:is(h1, h2, h3, h4, h5, h6) {
 		hyphens: auto;
 		overflow-wrap: break-word;
 		text-wrap: balance;
+		text-box-trim: trim-both;
 	}
 	p {
 		hyphens: auto;
 		overflow-wrap: break-word;
+		text-box-trim: trim-both;
 	}
-	input,
-	button,
-	textarea,
-	select {
+	:is(input, button, textarea, select) {
 		font: inherit;
 		font-size: 1rem;
 	}
-	img,
-	picture,
-	video,
-	canvas,
-	svg {
+	:is(img, picture, video, canvas, svg) {
 		display: block;
 		max-width: 100%;
+		height: auto;
 	}
 	@media (prefers-reduced-motion: no-preference) {
 		html {
+			color-scheme: light dark;
 			interpolate-size: allow-keywords;
 		}
+	}
+}
+@layer Variables {
+	:is(*, *::before, *::after) {
+		--riColor: var(--CustomColor, #2f27ce);
+		--riAccent: oklch(from var(--riColor) 0.55 0.2 h);
+		--riBackground: oklch(from var(--riColor) 0.99 0.05 h);
+		--riFaded: oklch(from var(--riColor) 0.99 0.4 h);
+		--riText: oklch(from var(--riColor) 0.11 0.05 h);
+
+		accent-color: var(--riAccent);
+	}
+	[my-color] {
+		--CustomColor: attr(my-color type(<color>), var(--riColor));
+	}
+}
+@layer Style {
+	body {
+		background-color: var(--riBackground);
+		color: var(--riText);
+	}
+	body > * {
+		width: min(80ch, 100%);
+		margin-inline: auto;
 	}
 }
