@@ -16,13 +16,28 @@
 		text-box-trim: trim-both;
 	}
 	p {
+		hanging-punctuation: first last;
 		hyphens: auto;
 		overflow-wrap: break-word;
 		text-box-trim: trim-both;
 	}
 	:is(input, button, textarea, select) {
 		font: inherit;
-		font-size: 1rem;
+		font-size: inherit;
+		color: inherit;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	textarea,
+	input:not(
+		[type='checkbox'],
+		[type='radio'],
+		[type='submit'],
+		[type='button'],
+		[type='reset']
+	) {
+		width: 100%;
+		max-width: 100%;
 	}
 	:is(img, picture, video, canvas, svg) {
 		display: block;
@@ -37,26 +52,142 @@
 	}
 }
 @layer Variables {
-	:is(*, *::before, *::after) {
-		--riColor: var(--CustomColor, #2f27ce);
-		--riAccent: oklch(from var(--riColor) 0.55 0.2 h);
-		--riBackground: oklch(from var(--riColor) 0.99 0.05 h);
-		--riFaded: oklch(from var(--riColor) 0.99 0.4 h);
-		--riText: oklch(from var(--riColor) 0.11 0.05 h);
-
-		accent-color: var(--riAccent);
+	:root {
+		--ri-font-size: 1rem;
+		--ri-h1-size: clamp(2rem, calc(3vw + 1.4rem), 3.8rem);
+		--ri-h2-size: clamp(1.8rem, calc(2vw + 1.3rem), 3rem);
+		--ri-h3-size: clamp(1.6rem, calc(1.5vw + 1.25rem), 2.4rem);
+		--ri-h4-size: clamp(1.4rem, calc(1vw + 1.2rem), 2rem);
+		--ri-h5-size: clamp(1.2rem, calc(0.6vw + 1.1rem), 1.5rem);
+		--ri-h6-size: clamp(1.125rem, calc(0.3vw + 1rem), 1.25rem);
+		--ri-max-width: 1200px;
+		--ri-text-width: 80ch;
+		--ri-small-size: 0.8rem;
+		--ri-spacing: 1rem;
 	}
-	[my-color] {
-		--CustomColor: attr(my-color type(<color>), var(--riColor));
+	:root,
+	[data-ri-rounded='min' i] {
+		--ri-border-radius: 0.5rem;
+	}
+	:root,
+	[data-ri-color],
+	[data-ri-hue] {
+		--ri-color: var(--ri-custom-color, #2f27ce);
+		/* Derived Colors */
+		--ri-accent: oklch(from var(--ri-color) 0.55 0.3 h);
+		--ri-background: oklch(from var(--ri-color) 0.99 0.05 h);
+		--ri-muted: oklch(from var(--ri-color) 0.99 0.4 h);
+		--ri-text: oklch(from var(--ri-color) 0.11 0.05 h);
+	}
+
+	[data-ri-color] {
+		--ri-custom-color: attr(data-ri-color type(<color>));
+	}
+	[data-ri-hue] {
+		--ri-hue: attr(data-ri-hue type(<number>));
+		--ri-custom-color: oklch(0.55 0.3 var(--ri-hue, 272));
+	}
+
+	[data-ri-rounded='none' i] {
+		--ri-border-radius: 0rem;
+	}
+
+	[data-ri-rounded='max' i] {
+		--ri-border-radius: 2rem;
 	}
 }
-@layer Style {
+@layer riStyle {
 	body {
-		background-color: var(--riBackground);
-		color: var(--riText);
+		accent-color: var(--ri-accent);
+		background-color: var(--ri-background);
+		color: var(--ri-text);
+		font-size: var(--ri-font-size);
+		& :has(* + *),
+		hr {
+			margin-block: var(--ri-spacing);
+		}
 	}
-	body > * {
-		width: min(80ch, 100%);
+	body > :is(main, header, footer) {
+		width: min(
+			var(--ri-max-width),
+			calc(100% - calc(var(--ri-spacing) * 2))
+		);
 		margin-inline: auto;
+	}
+	body > :not(header, main, footer, section, article) {
+		width: 100%;
+		max-width: var(--ri-max-width);
+		margin-inline: auto;
+		padding-inline: var(--ri-gutter);
+	}
+	nav {
+		align-items: center;
+		border-bottom: 1px solid var(--ri-text);
+		display: flex;
+		flex-wrap: wrap;
+		min-width: 100%;
+		:is(ul, ol) {
+			flex-wrap: wrap;
+			list-style: none;
+			padding: 0;
+		}
+		&:has(ul) {
+			flex-direction: row;
+			justify-content: space-between;
+		}
+		&:has(ol) {
+			justify-content: start;
+		}
+		ul {
+			display: flex;
+			gap: var(--ri-spacing);
+		}
+	}
+	:is(h1, h2, h3, h4, h5, h6) {
+		margin-block: var(--ri-spacing);
+		padding-bottom: calc(var(--ri-spacing) * 0.5);
+		border-bottom: 1px solid var(--ri-text);
+	}
+	img,
+	article {
+		border-radius: var(--ri-border-radius);
+	}
+	img {
+		max-width: 100%;
+		/*max-height: calc(100vh - var(--ri-spacing));*/
+	}
+	input:is([type='reset'], [type='button'], [type='submit']),
+	button {
+		border: none;
+		border-radius: var(--ri-border-radius);
+	}
+
+	h1 {
+		font-size: var(--ri-h1-size);
+	}
+	h2 {
+		font-size: var(--ri-h2-size);
+	}
+	h3 {
+		font-size: var(--ri-h3-size);
+	}
+	h4 {
+		font-size: var(--ri-h4-size);
+	}
+	h5 {
+		font-size: var(--ri-h5-size);
+	}
+	h6 {
+		font-size: var(--ri-h6-size);
+	}
+	article {
+		overflow: clip;
+		background-color: var(--ri-muted);
+		> * {
+			padding: var(--ri-spacing);
+		}
+		> :is(header, footer) {
+			background-color: var(--ri-accent);
+		}
 	}
 }
