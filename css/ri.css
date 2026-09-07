@@ -1,110 +1,59 @@
 @layer Variables {
 	/* #region Root */
 	:root {
-		color-scheme: light dark;
 		interpolate-size: allow-keywords;
 
-		@media (prefers-color-scheme: light) {
-			color-scheme: light;
-		}
-		@media (prefers-color-scheme: dark) {
-			color-scheme: dark;
-		}
-
+		--ri-article-width: 80ch;
 		--ri-font-size: 1rem;
+		--ri-font-weight: 400;
+		--ri-full-width: 1200px;
 		--ri-h1-size: clamp(2rem, calc(3vw + 1.4rem), 3.8rem);
 		--ri-h2-size: clamp(1.8rem, calc(2vw + 1.3rem), 3rem);
 		--ri-h3-size: clamp(1.6rem, calc(1.5vw + 1.25rem), 2.4rem);
 		--ri-h4-size: clamp(1.4rem, calc(1vw + 1.2rem), 2rem);
 		--ri-h5-size: clamp(1.2rem, calc(0.6vw + 1.1rem), 1.5rem);
 		--ri-h6-size: clamp(1.125rem, calc(0.3vw + 1rem), 1.25rem);
-		--ri-font-weight: 400;
 		--ri-heading-weight: 600;
-		--ri-full-width: 1200px;
-		--ri-article-width: 80ch;
-		--ri-max-width: var(--ri-full-width);
-		--ri-text-width: 80ch;
 		--ri-small-size: 0.8rem;
 		--ri-spacing: 1rem;
+
+		--ri-sans:
+			-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans,
+			'Helvetica Neue', sans-serif;
+		--ri-serif:
+			'Iowan Old Style', 'Palatino Linotype', Palatino, 'Times New Roman',
+			serif;
+		--ri-code: Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+		/* Theming */
+		color-scheme: light dark;
+		@media (prefers-color-scheme: light) {
+			color-scheme: light;
+		}
+		@media (prefers-color-scheme: dark) {
+			color-scheme: dark;
+		}
+		.ri-light {
+			color-scheme: light;
+		}
+
+		.ri-dark {
+			color-scheme: revert;
+		}
 	}
+
 	:root,
 	.ri-rounded-min {
 		--ri-border-radius: 0.5rem;
 	}
+
 	:root,
 	.ri-width-full {
 		--ri-max-width: var(--ri-full-width);
 	}
+
 	.ri-width-article {
 		--ri-max-width: var(--ri-article-width);
-	}
-	/* #endregion */
-
-	/* #region Color */
-	:root,
-	[data-ri-color],
-	[data-ri-hue] {
-		.ri-light,
-		[data-theme='light'] {
-			color-scheme: light;
-		}
-		.ri-dark,
-		[data-theme='dark'] {
-			color-scheme: dark;
-		}
-		--ri-color: var(--ri-custom-color, #2f27ce);
-
-		--ri-accent: light-dark(
-			oklch(from var(--ri-color) 0.6 0.2 h),
-			oklch(from var(--ri-color) 0.6 0.16 h)
-		);
-
-		--ri-background: light-dark(
-			oklch(from var(--ri-color) 0.98 0.01 h),
-			oklch(from var(--ri-color) 0.14 0.01 h)
-		);
-
-		--ri-border-color: light-dark(
-			oklch(from var(--ri-color) 0.88 0.02 h),
-			oklch(from var(--ri-color) 0.44 0.02 h)
-		);
-
-		--ri-card-background: light-dark(
-			oklch(from var(--ri-color) 0.96 0.02 h),
-			oklch(from var(--ri-color) 0.18 0.01 h)
-		);
-
-		--ri-header-footer-color: light-dark(
-			oklch(from var(--ri-color) 0.92 0.06 h),
-			oklch(from var(--ri-color) 0.22 0.02 h)
-		);
-
-		--ri-text: light-dark(
-			oklch(from var(--ri-color) 0.2 0.02 h),
-			oklch(from var(--ri-color) 0.8 0.02 h)
-		);
-
-		--ri-text-accent: light-dark(
-			oklch(from var(--ri-color) 0.6 0.2 h),
-			oklch(from var(--ri-color) 0.1 0.1 h)
-		);
-
-		--ri-text-muted: light-dark(
-			oklch(from var(--ri-color) 0.4 0.02 h),
-			oklch(from var(--ri-color) 0.6 0.02 h)
-		);
-
-		--ri-border: 1px solid var(--ri-border-color);
-		--ri-quote: 6px solid var(--ri-border-color);
-	}
-	/* #endregion Root */
-
-	[data-ri-color] {
-		--ri-custom-color: attr(data-ri-color type(<color>));
-	}
-	[data-ri-hue] {
-		--ri-hue: attr(data-ri-hue type(<number>));
-		--ri-custom-color: oklch(0.55 0.3 var(--ri-hue, 272));
 	}
 
 	.ri-rounded-none {
@@ -114,109 +63,202 @@
 	.ri-rounded-max {
 		--ri-border-radius: 1rem;
 	}
+	/* #endregion */
+
+	/* #region Color & Border */
+
+	:root,
+	.ri-light,
+	.ri-dark,
+	[data-ri-color],
+	[data-ri-hue] {
+		--ri-color: var(--ri-custom-color, #2f27ce);
+
+		/* Theming: manual override */
+
+		--ri-accent: light-dark(
+			oklch(from var(--ri-color) 0.6 0.2 h),
+			oklch(from var(--ri-color) 0.6 0.16 h)
+		);
+		--ri-accent-hover: light-dark(
+			oklch(from var(--ri-color) 0.66 0.22 h),
+			oklch(from var(--ri-color) 0.48 0.16 h)
+		);
+		--ri-background: light-dark(
+			oklch(from var(--ri-color) 0.98 0.01 h),
+			oklch(from var(--ri-color) 0.14 0.01 h)
+		);
+		--ri-border-color: light-dark(
+			oklch(from var(--ri-color) 0.88 0.02 h),
+			oklch(from var(--ri-color) 0.44 0.02 h)
+		);
+		--ri-card-background: light-dark(
+			oklch(from var(--ri-color) 0.96 0.02 h),
+			oklch(from var(--ri-color) 0.18 0.01 h)
+		);
+		--ri-header-footer-color: light-dark(
+			oklch(from var(--ri-color) 0.96 0.04 h),
+			oklch(from var(--ri-color) 0.22 0.02 h)
+		);
+		--ri-input-background-color: light-dark(
+			oklch(from var(--ri-color) 0.92 0.02 h),
+			oklch(from var(--ri-color) 0.22 0.01 h)
+		);
+		--ri-text: light-dark(
+			oklch(from var(--ri-color) 0.2 0.02 h),
+			oklch(from var(--ri-color) 0.8 0.02 h)
+		);
+		--ri-text-muted: light-dark(
+			oklch(from var(--ri-color) 0.4 0.02 h),
+			oklch(from var(--ri-color) 0.6 0.02 h)
+		);
+
+		--ri-border-size: 2px;
+		--ri-border: var(--ri-border-size) solid var(--ri-border-color);
+		--ri-quote: calc(var(--ri-border-size) * 3) solid var(--ri-border-color);
+	}
+
+	[data-ri-color] {
+		--ri-custom-color: attr(data-ri-color type(<color>));
+	}
+
+	[data-ri-hue] {
+		--ri-custom-color: oklch(0.55 0.3 var(--ri-hue, 272));
+		--ri-hue: attr(data-ri-hue type(<number>));
+	}
+
+	/* #endregion */
 }
+
 @layer riStyle {
+	/* #region Reset & Base */
 	:where(*, *::before, *::after) {
 		box-sizing: border-box;
 	}
+
 	*:not(dialog) {
 		margin: 0;
 	}
-	body {
-		font-family:
-			system-ui,
-			-apple-system,
-			BlinkMacSystemFont,
-			'Segoe UI',
-			Roboto,
-			Oxygen-Sans,
-			Ubuntu,
-			Cantarell,
-			'Helvetica Neue',
-			sans-serif;
-		-webkit-font-smoothing: antialiased;
-		line-height: 1.5;
 
+	body {
 		accent-color: var(--ri-accent);
 		background-color: var(--ri-background);
 		color: var(--ri-text);
 		font-size: var(--ri-font-size);
+		font-family: var(--ri-sans);
 		font-weight: var(--ri-font-weight);
-		hr {
-			margin-block: var(--ri-spacing);
-		}
+		-webkit-font-smoothing: antialiased;
+		line-height: 1.5;
+
 		& > * {
-			background: inherit;
-			width: min(
+			inline-size: min(
 				var(--ri-max-width),
 				calc(100% - calc(var(--ri-spacing) * 2))
 			);
 			margin-inline: auto;
 		}
-		hr {
-			border: none;
-			border-bottom: var(--ri-border);
+
+		:where(:focus-within, :focus-visible) {
+			outline-color: var(--ri-accent);
 		}
 	}
+	.ri-sans {
+		font-family: var(--ri-sans);
+	}
+	.ri-serif {
+		font-family: var(--ri-serif);
+	}
+	.ri-code {
+		font-family: var(--ri-code);
+	}
+	/* #endregion */
 
-	:is(body, main, section, article, aside, fieldset, form, details) {
+	/* #region Layout Containers */
+	:where(
+		body,
+		main,
+		section,
+		article,
+		aside,
+		fieldset,
+		form,
+		details,
+		dialog
+	) {
 		display: flex;
 		flex-direction: column;
 		row-gap: var(--ri-spacing);
 	}
 
-	:is(body, main, section, article, aside)
-		> :first-child:is(h1, h2, h3, h4, h5, h6) {
+	:where(body, main, section, article, aside, dialog)
+		> :first-child:where(h1, h2, h3, h4, h5, h6) {
 		margin-block-end: var(--ri-spacing);
 	}
 
+	header,
+	footer {
+		padding-block: var(--ri-spacing);
+	}
+
+	header,
+	:not(header) > :where(h1, h2, h3) {
+		border-block-end: var(--ri-border);
+	}
+
+	footer {
+		border-block-start: var(--ri-border);
+	}
+
+	hr {
+		border: none;
+		border-block-end: var(--ri-border);
+		margin-block: var(--ri-spacing);
+	}
+
+	.grid {
+		display: grid;
+		gap: var(--ri-spacing);
+		grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+	}
+	/* #endregion */
+
+	/* #region Navigation */
 	nav {
 		align-items: center;
 		display: flex;
+		flex-wrap: wrap;
+		gap: var(--ri-spacing);
+		justify-content: space-between;
 		padding-block: var(--ri-spacing);
 
-		flex-wrap: wrap;
-		:is(ul, ol) {
+		strong {
+			font-size: var(--ri-h5-size);
+		}
+
+		:where(ul, ol) {
 			flex-wrap: wrap;
 			list-style: none;
 			padding: 0;
 		}
-		&:has(ul) {
-			flex-direction: row;
-			justify-content: space-between;
-		}
-		&:has(ol) {
-			justify-content: start;
-		}
+
+		menu,
+		ol,
 		ul {
 			display: flex;
 			gap: var(--ri-spacing);
 		}
 	}
-	nav strong {
-		font-size: var(--ri-h5-size);
-	}
+	/* #endregion */
 
-	header,
-	:not(header) > :is(h1, h2, h3) {
-		border-block-end: var(--ri-border);
-	}
-	footer {
-		border-block-start: var(--ri-border);
-	}
-
-	header,
-	footer {
-		padding-block: var(--ri-spacing);
-	}
-
-	:is(h1, h2, h3, h4, h5, h6) {
+	/* #region Typography */
+	:where(h1, h2, h3, h4, h5, h6) {
+		font-weight: var(--ri-heading-weight);
 		hyphens: auto;
 		overflow-wrap: break-word;
-		text-wrap: balance;
 		text-box-trim: trim-start;
-		font-weight: var(--ri-heading-weight);
+		text-wrap: balance;
 	}
+
 	h1 {
 		font-size: var(--ri-h1-size);
 	}
@@ -239,77 +281,136 @@
 	p,
 	legend,
 	small,
-	figcaption {
+	figcaption,
+	a {
 		hanging-punctuation: first last;
 		hyphens: auto;
 		overflow-wrap: break-word;
 		text-box-trim: trim-both;
 	}
+
 	p,
 	legend,
 	figcaption {
 		font-size: var(--ri-font-size);
 	}
-	blockquote,
-	code,
-	figcaption {
-		padding-inline-start: var(--ri-spacing);
-	}
-	blockquote {
-		border-inline-start: var(--ri-quote);
-	}
+
 	a {
 		color: var(--ri-accent);
 	}
-	small {
-		font-size: var(--ri-small-size);
-		color: var(--ri-text-muted);
+
+	abbr {
+		text-underline-offset: 3px;
 	}
+
+	/* blockquote's  treatment  lives with article/aside/dialog/details */
+	blockquote {
+		border-inline-start: var(--ri-quote);
+		font-family: var(--ri-serif);
+		padding-block: var(--ri-spacing);
+		padding-inline-start: var(--ri-spacing);
+	}
+
+	code,
+	kbd {
+		border-radius: var(--ri-border-radius);
+		font-family: var(--ri-code);
+		padding: 1ch;
+		padding-block: 0.5ch;
+	}
+
+	code {
+		background-color: var(--ri-input-background-color);
+		padding-inline-start: var(--ri-spacing);
+	}
+
+	kbd {
+		background-color: var(--ri-text);
+		color: var(--ri-background);
+	}
+
+	mark {
+		background: var(--ri-accent);
+		color: var(--ri-background);
+	}
+
+	del,
+	small,
 	figcaption {
 		color: var(--ri-text-muted);
 	}
-	table {
-		text-align: left;
-	}
-	form:not(:has(fieldset)),
-	fieldset {
-		display: flex;
-		flex-direction: column;
-		border: var(--ri-border);
-		border-radius: var(--ri-border-radius);
-		background-color: var(--ri-card-background);
-	}
-	legend {
-		transform: translateY(-50%);
-		padding-inline: var(--ri-spacing);
-		border: var(--ri-border);
-		border-block-end: none;
-		background-color: inherit;
-		border-top-left-radius: var(--ri-border-radius);
-		border-top-right-radius: var(--ri-border-radius);
+
+	small {
+		font-size: var(--ri-small-size);
 	}
 
-	select,
+	figcaption {
+		padding-inline-start: var(--ri-spacing);
+	}
+
+	table {
+		text-align: start;
+	}
+	/* #endregion */
+
+	/* #region Forms */
+	form:not(:has(fieldset)),
+	fieldset {
+		background-color: var(--ri-card-background);
+		color: var(--ri-text);
+		border: var(--ri-border);
+		border-radius: var(--ri-border-radius);
+		display: flex;
+		flex-direction: column;
+	}
+
+	* + fieldset {
+		margin-block-start: var(--ri-spacing);
+	}
+
+	legend {
+		background-color: inherit;
+		border: var(--ri-border);
+		border-block-end: none;
+		border-start-start-radius: var(--ri-border-radius);
+		border-start-end-radius: var(--ri-border-radius);
+		padding-inline: var(--ri-spacing);
+		transform: translateY(-50%);
+	}
+
+	select {
+		appearance: base-select;
+		background-color: var(--ri-input-background-color);
+		border: var(--ri-border);
+		max-block-size: fit-content;
+		padding: var(--ri-spacing);
+	}
+
+	select:where([multiple]) {
+		padding-block: none;
+		padding-inline: none;
+	}
+
 	select::picker(select) {
 		appearance: base-select;
-		border-radius: var(--ri-border-radius);
 		background-color: var(--ri-background);
-		color: inherit;
+		border-radius: var(--ri-border-radius);
 	}
 
 	input[type='color'] {
-		-webkit-appearance: none;
-		-moz-appearance: none;
 		appearance: none;
+		-moz-appearance: none;
+		-webkit-appearance: none;
 	}
+
 	::-moz-color-swatch {
 		border-radius: var(--ri-border-radius);
 	}
+
 	::-webkit-color-swatch {
 		border-radius: var(--ri-border-radius);
 	}
 
-	select,
 	textarea,
 	input:not(
 		[type='checkbox'],
@@ -320,116 +421,144 @@
 		[type='color'],
 		[type='range']
 	) {
-		width: 100%;
-		max-width: 100%;
+		inline-size: 100%;
+		max-inline-size: 100%;
 		padding: var(--ri-spacing);
 	}
 
 	textarea {
-		resize: none;
 		field-sizing: content;
-		min-height: 5lh;
-		max-height: 10lh;
+		min-block-size: 5lh;
+		max-block-size: 10lh;
+		resize: none;
 	}
-	:is(input, button, textarea, select) {
+
+	:where(input, button, textarea, select) {
+		background-color: var(--ri-input-background-color);
+		border: var(--ri-border);
+		border-radius: var(--ri-border-radius);
+		color: var(--ri-text);
 		font: inherit;
 		font-size: inherit;
-		color: inherit;
-		display: inline-block;
-		border-radius: var(--ri-border-radius);
-		border: var(--ri-border);
-		background-color: var(--ri-background);
 	}
 
-	:is(img, picture, video, canvas, svg) {
-		display: block;
-		max-width: 100%;
-		height: auto;
-	}
-
-	img,
-	article,
-	aside,
-	dialog,
-	details,
-	picture,
-	video,
-	canvas {
-		border-radius: var(--ri-border-radius);
-	}
-
-	input:is([type='reset'], [type='button'], [type='submit']),
+	input:where([type='reset'], [type='button'], [type='submit']),
 	button,
+	input::file-selector-button,
 	[role='button'] {
+		background-color: var(--ri-accent);
 		border: none;
 		border-radius: var(--ri-border-radius);
-		text-decoration: none;
-		background-color: var(--ri-accent);
 		color: var(--ri-background);
 		padding: var(--ri-spacing);
+		text-decoration: none;
+
+		&:where(:hover, :active, :focus) {
+			background-color: var(--ri-accent-hover);
+		}
+
+		&[disabled] {
+			background-color: var(--ri-accent-hover);
+			cursor: not-allowed;
+		}
+	}
+	/* #endregion */
+
+	/* #region Media (elements that are replaced content, not surfaces) */
+	:where(img, picture, video, canvas, svg) {
+		block-size: auto;
+		display: block;
+		max-inline-size: 100%;
 	}
 
-	article,
-	aside,
-	dialog,
-	details {
+	:where(img, picture, video, canvas) {
+		border-radius: var(--ri-border-radius);
+	}
+	/* #endregion */
+
+	/* #region Surfaces (article, aside, dialog, details, blockquote) */
+	:where(article, aside, dialog, details) {
+		background-color: var(--ri-card-background);
+		color: var(--ri-text);
+		border-radius: var(--ri-border-radius);
 		justify-content: space-between;
 		overflow: clip;
 	}
 
-	article,
-	dialog,
-	details {
-		background-color: var(--ri-card-background);
-		color: inherit;
+	:where(article, dialog, details, blockquote) {
+		background-color: var(--ri-header-footer-color);
+		color: var(--ri-text);
 	}
 
-	aside,
-	dialog {
+	blockquote {
+		border-end-end-radius: var(--ri-border-radius);
+		border-start-end-radius: var(--ri-border-radius);
+	}
+
+	:where(aside, dialog) {
 		border: var(--ri-border);
 	}
-	:is(article, aside, dialog, details) > * {
+
+	:where(article, aside, dialog) > * {
 		padding-inline: var(--ri-spacing);
+
 		&:first-child {
-			padding-block-start: var(--ri-spacing);
-		}
-		&:last-child {
 			padding-block-end: var(--ri-spacing);
 		}
+
+		&:last-child {
+			padding-block-start: var(--ri-spacing);
+		}
 	}
-	:is(article, dialog) > :is(header, footer) {
+
+	:where(article, dialog) > :where(header, footer) {
 		background-color: var(--ri-header-footer-color);
 	}
 
-	.grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
-		gap: var(--ri-spacing);
-	}
-	[popover] {
-		margin-block: auto;
-		margin-inline: auto;
+	details {
+		padding-inline: var(--ri-spacing);
+
+		/* first/last padding is intentionally reversed vs. article/aside/dialog
+		   above — it pairs with the ::details-content animation below */
+		:first-child {
+			padding-block-start: var(--ri-spacing);
+		}
+
+		:last-child {
+			padding-block-end: var(--ri-spacing);
+		}
 	}
 
+	dialog {
+		inset: 0;
+		inline-size: var(--ri-max-width);
+		padding: 0;
+	}
+
+	/* #endregion */
+
+	/* #region Animations */
 	@media (prefers-reduced-motion: no-preference) {
 		details {
 			scroll-behavior: smooth;
-			scrollbar-gutter: stable;
 			scroll-padding-top: var(--ri-spacing);
+			scrollbar-gutter: stable;
 
 			&::details-content {
 				block-size: 0;
 				opacity: 0;
 				overflow: clip;
 				transition-behavior: allow-discrete;
-				transition-property: block-size opacity overlay;
 				transition-duration: 200ms;
+				transition-property: block-size opacity overlay;
 			}
+
 			&[open]::details-content {
-				opacity: 1;
 				block-size: fit-content;
+				opacity: 1;
 				transition-duration: 200ms;
 			}
 		}
 	}
+	/* #endregion */
 }
