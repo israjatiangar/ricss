@@ -452,6 +452,7 @@
 		color: var(--ri-background);
 		padding: var(--ri-spacing);
 		text-decoration: none;
+		text-align: center;
 
 		&:where(:hover, :active, :focus) {
 			background-color: var(--ri-accent-hover);
