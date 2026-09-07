@@ -1,4 +1,5 @@
 @layer Variables {
+	/* #region Root */
 	:root {
 		color-scheme: light dark;
 		interpolate-size: allow-keywords;
@@ -37,7 +38,9 @@
 	.ri-width-article {
 		--ri-max-width: var(--ri-article-width);
 	}
+	/* #endregion */
 
+	/* #region Color */
 	:root,
 	[data-ri-color],
 	[data-ri-hue] {
@@ -45,7 +48,6 @@
 		[data-theme='light'] {
 			color-scheme: light;
 		}
-
 		.ri-dark,
 		[data-theme='dark'] {
 			color-scheme: dark;
@@ -53,42 +55,49 @@
 		--ri-color: var(--ri-custom-color, #2f27ce);
 
 		--ri-accent: light-dark(
-			oklch(from var(--ri-color) 0.55 0.3 h),
-			oklch(from var(--ri-color) 0.55 0.1 h)
+			oklch(from var(--ri-color) 0.6 0.2 h),
+			oklch(from var(--ri-color) 0.6 0.16 h)
 		);
 
 		--ri-background: light-dark(
-			oklch(from var(--ri-color) 0.96 0.05 h),
-			oklch(from var(--ri-color) 0.07 0.01 h)
+			oklch(from var(--ri-color) 0.98 0.01 h),
+			oklch(from var(--ri-color) 0.14 0.01 h)
 		);
 
 		--ri-border-color: light-dark(
-			oklch(from var(--ri-color) 0.88 0.1 h),
-			oklch(from var(--ri-color) 0.22 0.1 h)
+			oklch(from var(--ri-color) 0.88 0.02 h),
+			oklch(from var(--ri-color) 0.44 0.02 h)
 		);
 
 		--ri-card-background: light-dark(
-			oklch(from var(--ri-color) 1 0.025 h),
-			oklch(from var(--ri-color) 0.11 0.05 h)
+			oklch(from var(--ri-color) 0.96 0.02 h),
+			oklch(from var(--ri-color) 0.18 0.01 h)
 		);
 
 		--ri-header-footer-color: light-dark(
-			oklch(from var(--ri-color) 0.99 0.05 h),
-			oklch(from var(--ri-color) 0.15 0.1 h)
-		);
-
-		--ri-muted-text: light-dark(
-			oklch(from var(--ri-color) 0.33 0.1 h),
-			oklch(from var(--ri-color) 0.33 0.1 h)
+			oklch(from var(--ri-color) 0.92 0.06 h),
+			oklch(from var(--ri-color) 0.22 0.02 h)
 		);
 
 		--ri-text: light-dark(
-			oklch(from var(--ri-color) 0.11 0.05 h),
-			oklch(from var(--ri-color) 0.77 0.02 h)
+			oklch(from var(--ri-color) 0.2 0.02 h),
+			oklch(from var(--ri-color) 0.8 0.02 h)
 		);
 
-		--ri-border: 2px solid var(--ri-border-color);
+		--ri-text-accent: light-dark(
+			oklch(from var(--ri-color) 0.6 0.2 h),
+			oklch(from var(--ri-color) 0.1 0.1 h)
+		);
+
+		--ri-text-muted: light-dark(
+			oklch(from var(--ri-color) 0.4 0.02 h),
+			oklch(from var(--ri-color) 0.6 0.02 h)
+		);
+
+		--ri-border: 1px solid var(--ri-border-color);
+		--ri-quote: 6px solid var(--ri-border-color);
 	}
+	/* #endregion Root */
 
 	[data-ri-color] {
 		--ri-custom-color: attr(data-ri-color type(<color>));
@@ -150,13 +159,13 @@
 		}
 	}
 
-	:is(body, main, section, article, aside, fieldset, form, dialog[open]) {
+	:is(body, main, section, article, aside, fieldset, form, details) {
 		display: flex;
 		flex-direction: column;
 		row-gap: var(--ri-spacing);
 	}
 
-	:is(body, main, section, article, aside, dialog[open])
+	:is(body, main, section, article, aside)
 		> :first-child:is(h1, h2, h3, h4, h5, h6) {
 		margin-block-end: var(--ri-spacing);
 	}
@@ -188,9 +197,12 @@
 		font-size: var(--ri-h5-size);
 	}
 
-	header:not(:has(h1, h2, h3)),
-	:is(h1, h2, h3) {
-		border-bottom: var(--ri-border);
+	header,
+	:not(header) > :is(h1, h2, h3) {
+		border-block-end: var(--ri-border);
+	}
+	footer {
+		border-block-start: var(--ri-border);
 	}
 
 	header,
@@ -203,7 +215,6 @@
 		overflow-wrap: break-word;
 		text-wrap: balance;
 		text-box-trim: trim-start;
-		/*text-box-edge: cap alphabetic;*/
 		font-weight: var(--ri-heading-weight);
 	}
 	h1 {
@@ -245,17 +256,17 @@
 		padding-inline-start: var(--ri-spacing);
 	}
 	blockquote {
-		border-inline-start: var(--ri-border);
+		border-inline-start: var(--ri-quote);
 	}
 	a {
 		color: var(--ri-accent);
 	}
 	small {
 		font-size: var(--ri-small-size);
-		color: var(--ri-muted-text);
+		color: var(--ri-text-muted);
 	}
 	figcaption {
-		color: var(--ri-muted-text);
+		color: var(--ri-text-muted);
 	}
 	table {
 		text-align: left;
@@ -268,6 +279,16 @@
 		border-radius: var(--ri-border-radius);
 		background-color: var(--ri-card-background);
 	}
+	legend {
+		transform: translateY(-50%);
+		padding-inline: var(--ri-spacing);
+		border: var(--ri-border);
+		border-block-end: none;
+		background-color: inherit;
+		border-top-left-radius: var(--ri-border-radius);
+		border-top-right-radius: var(--ri-border-radius);
+	}
+
 	select,
 	select::picker(select) {
 		appearance: base-select;
@@ -296,7 +317,8 @@
 		[type='submit'],
 		[type='button'],
 		[type='reset'],
-		[type='color']
+		[type='color'],
+		[type='range']
 	) {
 		width: 100%;
 		max-width: 100%;
@@ -314,7 +336,6 @@
 		font-size: inherit;
 		color: inherit;
 		display: inline-block;
-		vertical-align: middle;
 		border-radius: var(--ri-border-radius);
 		border: var(--ri-border);
 		background-color: var(--ri-background);
@@ -330,6 +351,7 @@
 	article,
 	aside,
 	dialog,
+	details,
 	picture,
 	video,
 	canvas {
@@ -337,9 +359,11 @@
 	}
 
 	input:is([type='reset'], [type='button'], [type='submit']),
-	button {
+	button,
+	[role='button'] {
 		border: none;
 		border-radius: var(--ri-border-radius);
+		text-decoration: none;
 		background-color: var(--ri-accent);
 		color: var(--ri-background);
 		padding: var(--ri-spacing);
@@ -347,21 +371,24 @@
 
 	article,
 	aside,
-	dialog {
+	dialog,
+	details {
 		justify-content: space-between;
 		overflow: clip;
 	}
 
 	article,
-	dialog {
+	dialog,
+	details {
 		background-color: var(--ri-card-background);
 		color: inherit;
 	}
+
 	aside,
 	dialog {
 		border: var(--ri-border);
 	}
-	:is(article, aside, dialog) > * {
+	:is(article, aside, dialog, details) > * {
 		padding-inline: var(--ri-spacing);
 		&:first-child {
 			padding-block-start: var(--ri-spacing);
@@ -386,6 +413,10 @@
 
 	@media (prefers-reduced-motion: no-preference) {
 		details {
+			scroll-behavior: smooth;
+			scrollbar-gutter: stable;
+			scroll-padding-top: var(--ri-spacing);
+
 			&::details-content {
 				block-size: 0;
 				opacity: 0;
