@@ -407,11 +407,12 @@
 		appearance: base-select;
 		background-color: var(--ri-input-background-color);
 		border: var(--ri-border);
-		max-block-size: fit-content;
+		min-block-size: fit-content;
 		padding: var(--ri-spacing);
 	}
 
 	select:where([multiple]) {
+		max-block-size: 10ch;
 		padding-block: none;
 		padding-inline: none;
 	}
@@ -565,6 +566,54 @@
 		inline-size: var(--ri-max-width);
 		padding: 0;
 	}
+	progress {
+		appearance: none;
+		background: var(--ri-background);
+		border: var(--ri-border);
+		border-radius: var(--ri-border-radius);
+		overflow: hidden;
+		width: 100%;
+
+		&[value] {
+			&::-webkit-progress-bar {
+				background: var(--ri-background);
+			}
+
+			&::-webkit-progress-value {
+				background: var(--ri-accent);
+			}
+
+			&::-moz-progress-bar {
+				background: var(--ri-accent);
+			}
+		}
+
+		&:not([value]) {
+			animation: ri-progress 2s infinite linear;
+			background: var(--ri-background)
+				linear-gradient(90deg, transparent 80%, var(--ri-accent) 0);
+			background-position: 200% 0;
+			background-size: 200% 100%;
+
+			&::-webkit-progress-bar {
+				background: transparent;
+			}
+
+			&::-webkit-progress-value {
+				background: transparent;
+			}
+
+			&::-moz-progress-bar {
+				background: transparent;
+			}
+		}
+	}
+
+	@keyframes ri-progress {
+		to {
+			background-position: -200% 0;
+		}
+	}
 
 	/* #endregion */
 
@@ -580,14 +629,14 @@
 				opacity: 0;
 				overflow: clip;
 				transition-behavior: allow-discrete;
-				transition-duration: 200ms;
+				transition-duration: 0.2s;
 				transition-property: block-size opacity overlay;
 			}
 
 			&[open]::details-content {
 				block-size: fit-content;
 				opacity: 1;
-				transition-duration: 200ms;
+				transition-duration: 0.2s;
 			}
 		}
 	}
