@@ -43,17 +43,17 @@
 	}
 
 	:root,
-	.ri-rounded-min {
-		--ri-border-radius: 0.5rem;
-	}
-
-	:root,
 	.ri-width-full {
 		--ri-max-width: var(--ri-full-width);
 	}
 
 	.ri-width-article {
 		--ri-max-width: var(--ri-article-width);
+	}
+
+	:root,
+	.ri-rounded-min {
+		--ri-border-radius: 0.5rem;
 	}
 
 	.ri-rounded-none {
@@ -68,8 +68,6 @@
 	/* #region Color & Border */
 
 	:root,
-	.ri-light,
-	.ri-dark,
 	[data-ri-color],
 	[data-ri-hue] {
 		--ri-color: var(--ri-custom-color, #2f27ce);
@@ -119,11 +117,13 @@
 	}
 
 	[data-ri-color] {
+		--ri-custom-color: attr(data-ri-color);
 		--ri-custom-color: attr(data-ri-color type(<color>));
 	}
 
 	[data-ri-hue] {
 		--ri-custom-color: oklch(0.55 0.3 var(--ri-hue, 272));
+		--ri-hue: attr(data-ri-hue);
 		--ri-hue: attr(data-ri-hue type(<number>));
 	}
 
@@ -171,6 +171,7 @@
 	.ri-code {
 		font-family: var(--ri-code);
 	}
+
 	/* #endregion */
 
 	/* #region Layout Containers */
@@ -200,12 +201,12 @@
 		padding-block: var(--ri-spacing);
 	}
 
-	header,
+	:not(dialog, blockquote) > header,
 	:not(header) > :where(h1, h2, h3) {
 		border-block-end: var(--ri-border);
 	}
 
-	footer {
+	:not(blockquote, dialog) > footer {
 		border-block-start: var(--ri-border);
 	}
 
@@ -215,10 +216,16 @@
 		margin-block: var(--ri-spacing);
 	}
 
-	.grid {
+	.ri-grid-fixed,
+	.ri-grid-flex {
 		display: grid;
 		gap: var(--ri-spacing);
+	}
+	.ri-grid-flex {
 		grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+	}
+	.ri-grid-fixed {
+		grid-template-columns: repeat(auto-fill, minmax(30ch, 1fr));
 	}
 	/* #endregion */
 
@@ -241,9 +248,8 @@
 			padding: 0;
 		}
 
-		menu,
-		ol,
-		ul {
+		:where(menu, ol, ul) {
+			align-items: center;
 			display: flex;
 			gap: var(--ri-spacing);
 		}
@@ -282,7 +288,8 @@
 	legend,
 	small,
 	figcaption,
-	a {
+	a,
+	caption {
 		hanging-punctuation: first last;
 		hyphens: auto;
 		overflow-wrap: break-word;
@@ -336,7 +343,8 @@
 
 	del,
 	small,
-	figcaption {
+	figcaption,
+	caption {
 		color: var(--ri-text-muted);
 	}
 
@@ -349,7 +357,23 @@
 	}
 
 	table {
-		text-align: start;
+		border-collapse: collapse;
+
+		:where(section, div):has(> &) {
+			overflow-x: auto;
+			border-radius: var(--ri-border-radius);
+		}
+
+		:where(th, td) {
+			text-align: start;
+			padding: var(--ri-spacing);
+		}
+		:not(thead, tfoot) tr:nth-child(odd) {
+			background-color: var(--ri-header-footer-color);
+		}
+		:not(tfoot) > tr {
+			border-bottom: var(--ri-border);
+		}
 	}
 	/* #endregion */
 
@@ -374,6 +398,7 @@
 		border-block-end: none;
 		border-start-start-radius: var(--ri-border-radius);
 		border-start-end-radius: var(--ri-border-radius);
+		margin-inline-start: var(--ri-spacing);
 		padding-inline: var(--ri-spacing);
 		transform: translateY(-50%);
 	}
@@ -450,10 +475,17 @@
 		border: none;
 		border-radius: var(--ri-border-radius);
 		color: var(--ri-background);
+		display: inline-block;
 		padding: var(--ri-spacing);
 		text-decoration: none;
 		text-align: center;
 
+		&.ri-secondary {
+			background-color: var(--ri-text);
+			&:where(:hover, :active, :focus) {
+				background-color: var(--ri-text-muted);
+			}
+		}
 		&:where(:hover, :active, :focus) {
 			background-color: var(--ri-accent-hover);
 		}
@@ -478,7 +510,7 @@
 	/* #endregion */
 
 	/* #region Surfaces (article, aside, dialog, details, blockquote) */
-	:where(article, aside, dialog, details) {
+	:where(article, aside, dialog, details, table) {
 		background-color: var(--ri-card-background);
 		color: var(--ri-text);
 		border-radius: var(--ri-border-radius);
@@ -486,33 +518,31 @@
 		overflow: clip;
 	}
 
-	:where(article, dialog, details, blockquote) {
-		background-color: var(--ri-header-footer-color);
+	:where(article, dialog, details) {
+		background-color: var(--ri-card-background);
 		color: var(--ri-text);
 	}
 
 	blockquote {
 		border-end-end-radius: var(--ri-border-radius);
 		border-start-end-radius: var(--ri-border-radius);
+		background-color: var(--ri-header-footer-color);
+		color: var(--ri-text);
 	}
 
 	:where(aside, dialog) {
 		border: var(--ri-border);
 	}
 
-	:where(article, aside, dialog) > * {
+	:where(article, aside, blockquote, dialog) > * {
 		padding-inline: var(--ri-spacing);
 
-		&:first-child {
-			padding-block-end: var(--ri-spacing);
-		}
-
-		&:last-child {
-			padding-block-start: var(--ri-spacing);
+		&:where(:first-child, &:last-child) {
+			padding-block: var(--ri-spacing);
 		}
 	}
 
-	:where(article, dialog) > :where(header, footer) {
+	:where(article, dialog) > :where(caption, header, footer) {
 		background-color: var(--ri-header-footer-color);
 	}
 
