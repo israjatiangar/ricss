@@ -64,7 +64,7 @@
 	}
 
 	.ri-rounded-max {
-		--ri-border-radius: 1rem;
+		--ri-border-radius: 1.5rem;
 	}
 	/* #endregion */
 
@@ -301,7 +301,6 @@
 	}
 
 	p,
-	legend,
 	small,
 	figcaption,
 	a,
@@ -318,7 +317,8 @@
 		font-size: var(--ri-font-size);
 	}
 
-	a {
+	a,
+	code {
 		color: var(--ri-accent);
 	}
 
@@ -355,6 +355,9 @@
 	mark {
 		background: var(--ri-accent);
 		color: var(--ri-background);
+	}
+	:has(code, kbd, mark) {
+		line-height: 2;
 	}
 
 	del,
@@ -412,8 +415,7 @@
 		color: var(--ri-text);
 		border: var(--ri-border);
 		border-radius: var(--ri-border-radius);
-		display: flex;
-		flex-direction: column;
+		padding-block: var(--ri-spacing);
 	}
 
 	* + fieldset {
@@ -426,8 +428,9 @@
 		border-block-end: none;
 		border-start-start-radius: var(--ri-border-radius);
 		border-start-end-radius: var(--ri-border-radius);
-		margin-inline-start: var(--ri-spacing);
+		margin-inline-start: var(--ri-border-radius);
 		padding-inline: var(--ri-spacing);
+		padding-block: 0.5ch;
 		transform: translateY(-50%);
 	}
 
