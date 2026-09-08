@@ -252,13 +252,10 @@
 			font-size: var(--ri-h5-size);
 		}
 
-		:where(ul, ol) {
+		:where(ul, ol, menu) {
 			flex-wrap: wrap;
 			list-style: none;
 			padding: 0;
-		}
-
-		:where(menu, ol, ul) {
 			align-items: center;
 			display: flex;
 			gap: var(--ri-spacing);
