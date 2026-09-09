@@ -1,8 +1,6 @@
 @layer Variables {
-	/* #region Root */
 	:root {
 		interpolate-size: allow-keywords;
-
 		--ri-article-width: 80ch;
 		--ri-font-size: 1rem;
 		--ri-font-weight: 400;
@@ -16,19 +14,16 @@
 		--ri-heading-weight: 700;
 		--ri-small-size: 0.8rem;
 		--ri-spacing: 1rem;
-
 		--ri-sans:
-			system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-			Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+			system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI', roboto,
+			helvetica, arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 		--ri-serif:
-			ui-serif, 'Iowan Old Style', 'Apple Garamond', Baskerville,
-			'Palatino Linotype', Palatino, Century Schoolbook,
+			ui-serif, 'Iowan Old Style', 'Apple Garamond', baskerville,
+			'Palatino Linotype', palatino, century schoolbook,
 			'Times New Roman', serif;
 		--ri-code:
-			ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+			ui-monospace, sfmono-regular, menlo, monaco, consolas,
 			'Liberation Mono', 'Courier New', monospace;
-
-		/* Theming */
 		color-scheme: light dark;
 		@media (prefers-color-scheme: light) {
 			color-scheme: light;
@@ -50,81 +45,68 @@
 			initial-value: #2f27ce;
 		}
 	}
-
 	:root,
 	.ri-width-full {
 		--ri-max-width: var(--ri-full-width);
 	}
-
 	.ri-width-article {
 		--ri-max-width: var(--ri-article-width);
 	}
-
 	:root,
 	.ri-rounded-min {
 		--ri-border-radius: 0.5rem;
 	}
-
 	.ri-rounded-none {
 		--ri-border-radius: 0rem;
 	}
-
 	.ri-rounded-max {
 		--ri-border-radius: 1.5rem;
 	}
-	/* #endregion */
-
-	/* #region Color & Border */
-
 	:root,
 	[data-ri-color],
 	[data-ri-hue] {
 		contain: style;
 		--ri-color: var(--ri-custom-color, #2f27ce);
-
-		/* Theming: manual override */
-
 		--ri-accent: light-dark(
-			oklch(from var(--ri-color) 0.6 0.2 h),
-			oklch(from var(--ri-color) 0.6 0.16 h)
+			oklch(from var(--ri-color) 60% 0.2 h),
+			oklch(from var(--ri-color) 60% 0.16 h)
 		);
 		--ri-accent-hover: light-dark(
-			oklch(from var(--ri-color) 0.66 0.22 h),
-			oklch(from var(--ri-color) 0.48 0.16 h)
+			oklch(from var(--ri-color) 66% 0.22 h),
+			oklch(from var(--ri-color) 48% 0.16 h)
 		);
 		--ri-background: light-dark(
-			oklch(from var(--ri-color) 0.98 0.01 h),
-			oklch(from var(--ri-color) 0.14 0.01 h)
+			oklch(from var(--ri-color) 98% 0.01 h),
+			oklch(from var(--ri-color) 14% 0.01 h)
 		);
 		--ri-border-color: light-dark(
-			oklch(from var(--ri-color) 0.88 0.02 h),
-			oklch(from var(--ri-color) 0.33 0.02 h)
+			oklch(from var(--ri-color) 88% 0.02 h),
+			oklch(from var(--ri-color) 33% 0.02 h)
 		);
 		--ri-card-background: light-dark(
-			oklch(from var(--ri-color) 0.96 0.02 h),
-			oklch(from var(--ri-color) 0.18 0.01 h)
+			oklch(from var(--ri-color) 96% 0.02 h),
+			oklch(from var(--ri-color) 18% 0.01 h)
 		);
 		--ri-header-footer-color: light-dark(
-			oklch(from var(--ri-color) 0.96 0.04 h),
-			oklch(from var(--ri-color) 0.22 0.02 h)
+			oklch(from var(--ri-color) 96% 0.04 h),
+			oklch(from var(--ri-color) 22% 0.02 h)
 		);
 		--ri-input-background-color: light-dark(
-			oklch(from var(--ri-color) 0.92 0.02 h),
-			oklch(from var(--ri-color) 0.22 0.01 h)
+			oklch(from var(--ri-color) 92% 0.02 h),
+			oklch(from var(--ri-color) 22% 0.01 h)
 		);
 		--ri-shadow-color: light-dark(
-			oklch(from var(--ri-color) 0.6 0.02 h / 0.18),
-			oklch(from var(--ri-color) 0.02 0.02 h / 0.6)
+			oklch(from var(--ri-color) 60% 0.02 h / 18%),
+			oklch(from var(--ri-color) 2% 0.02 h / 60%)
 		);
 		--ri-text: light-dark(
-			oklch(from var(--ri-color) 0.2 0.02 h),
-			oklch(from var(--ri-color) 0.8 0.02 h)
+			oklch(from var(--ri-color) 20% 0.02 h),
+			oklch(from var(--ri-color) 80% 0.02 h)
 		);
 		--ri-text-muted: light-dark(
-			oklch(from var(--ri-color) 0.4 0.02 h),
-			oklch(from var(--ri-color) 0.6 0.02 h)
+			oklch(from var(--ri-color) 40% 0.02 h),
+			oklch(from var(--ri-color) 60% 0.02 h)
 		);
-
 		--ri-border-size: 2px;
 		--ri-border: var(--ri-border-size) solid var(--ri-border-color);
 		--ri-boxshadow:
@@ -132,31 +114,23 @@
 			0px 1px 3px 1px var(--ri-shadow-color);
 		--ri-quote: calc(var(--ri-border-size) * 3) solid var(--ri-border-color);
 	}
-
 	[data-ri-color] {
 		--ri-custom-color: attr(data-ri-color);
 		--ri-custom-color: attr(data-ri-color type(<color>));
 	}
-
 	[data-ri-hue] {
-		--ri-custom-color: oklch(0.55 0.3 var(--ri-hue, 272));
+		--ri-custom-color: oklch(55% 0.3 var(--ri-hue, 272));
 		--ri-hue: attr(data-ri-hue);
 		--ri-hue: attr(data-ri-hue type(<number>));
 	}
-
-	/* #endregion */
 }
-
 @layer riStyle {
-	/* #region Reset & Base */
 	:where(*, *::before, *::after) {
 		box-sizing: border-box;
 	}
-
 	*:not(dialog) {
 		margin: 0;
 	}
-
 	body {
 		accent-color: var(--ri-accent);
 		background-color: var(--ri-background);
@@ -166,7 +140,6 @@
 		font-weight: var(--ri-font-weight);
 		-webkit-font-smoothing: antialiased;
 		line-height: 1.5;
-
 		& > * {
 			inline-size: min(
 				var(--ri-max-width),
@@ -187,10 +160,6 @@
 	:where(:focus-within, :focus-visible) {
 		outline-color: var(--ri-accent);
 	}
-
-	/* #endregion */
-
-	/* #region Layout Containers */
 	:where(
 		body,
 		main,
@@ -200,39 +169,29 @@
 		fieldset,
 		form,
 		details,
-		dialog
+		dialog[open]
 	) {
 		display: flex;
 		flex-direction: column;
 		row-gap: var(--ri-spacing);
 		justify-content: center;
 	}
-
-	:where(body, main, section, article, aside, dialog)
-		> :first-child:where(h1, h2, h3, h4, h5, h6) {
-		margin-block-end: var(--ri-spacing);
-	}
-
 	header,
 	footer {
 		padding-block: var(--ri-spacing);
 	}
-
-	:not(dialog, blockquote) > header,
+	header,
 	:not(header) > :where(h1, h2, h3) {
 		border-block-end: var(--ri-border);
 	}
-
 	:not(blockquote, dialog) > footer {
 		border-block-start: var(--ri-border);
 	}
-
 	hr {
 		border: none;
 		border-block-end: var(--ri-border);
 		margin-block: var(--ri-spacing);
 	}
-
 	.ri-grid-fixed,
 	.ri-grid-flex {
 		display: grid;
@@ -244,9 +203,6 @@
 	.ri-grid-fixed {
 		grid-template-columns: repeat(auto-fill, minmax(30ch, 1fr));
 	}
-	/* #endregion */
-
-	/* #region Navigation */
 	nav {
 		align-items: center;
 		display: flex;
@@ -254,7 +210,6 @@
 		gap: var(--ri-spacing);
 		justify-content: space-between;
 		padding-block: var(--ri-spacing);
-
 		strong {
 			font-size: var(--ri-h5-size);
 		}
@@ -267,13 +222,11 @@
 			display: flex;
 			gap: var(--ri-spacing);
 		}
+
 		a {
 			text-decoration: none;
 		}
 	}
-	/* #endregion */
-
-	/* #region Typography */
 	:where(h1, h2, h3, h4, h5, h6) {
 		font-weight: var(--ri-heading-weight);
 		hyphens: auto;
@@ -281,10 +234,9 @@
 		text-box-trim: trim-start;
 		text-wrap: balance;
 	}
-	:where(tfoot, thead, figcaption, caption, summary) {
+	:where(tfoot, thead, figcaption, caption, summary, dt) {
 		font-weight: var(--ri-heading-weight);
 	}
-
 	h1 {
 		font-size: var(--ri-h1-size);
 	}
@@ -303,7 +255,6 @@
 	h6 {
 		font-size: var(--ri-h6-size);
 	}
-
 	p,
 	small,
 	figcaption,
@@ -314,30 +265,28 @@
 		overflow-wrap: break-word;
 		text-box-trim: trim-both;
 	}
-
 	p,
 	legend,
 	figcaption {
 		font-size: var(--ri-font-size);
 	}
-
 	a,
 	code {
 		color: var(--ri-accent);
 	}
-
 	abbr {
 		text-underline-offset: 0.1lh;
 	}
-
-	/* blockquote's  treatment  lives with article/aside/dialog/details */
 	blockquote {
 		border-inline-start: var(--ri-quote);
 		font-family: var(--ri-serif);
 		padding-block: var(--ri-spacing);
-		padding-inline-start: var(--ri-spacing);
+		padding-inline: var(--ri-spacing);
+		border-end-end-radius: var(--ri-border-radius);
+		border-start-end-radius: var(--ri-border-radius);
+		background-color: var(--ri-header-footer-color);
+		color: var(--ri-text);
 	}
-
 	code,
 	kbd {
 		border-radius: var(--ri-border-radius);
@@ -345,16 +294,16 @@
 		padding: 1ch;
 		padding-block: 0.5ch;
 	}
-
 	code {
 		background-color: var(--ri-input-background-color);
+		&:active {
+			user-select: all;
+		}
 	}
-
 	kbd {
 		background-color: var(--ri-text);
 		color: var(--ri-background);
 	}
-
 	mark {
 		background: var(--ri-accent);
 		color: var(--ri-background);
@@ -362,14 +311,12 @@
 	:has(> :is(code, kbd, mark)) {
 		line-height: 2;
 	}
-
 	del,
 	small,
 	figcaption,
 	caption {
 		color: var(--ri-text-muted);
 	}
-
 	small {
 		font-size: var(--ri-small-size);
 	}
@@ -378,22 +325,16 @@
 		word-break: break-word;
 		tab-size: 2;
 	}
-	pre:active code {
-		user-select: all;
-	}
 	pre code {
 		white-space: pre;
 		display: block;
 	}
-
 	figcaption {
 		padding-inline-start: var(--ri-spacing);
 	}
-
 	table {
 		border-collapse: collapse;
 		width: 100%;
-
 		:where(section, div):has(> &) {
 			overflow-x: auto;
 			border-radius: var(--ri-border-radius);
@@ -403,16 +344,15 @@
 			text-align: start;
 			padding: var(--ri-spacing);
 		}
+
 		tbody tr:nth-child(odd) {
 			background-color: var(--ri-header-footer-color);
 		}
+
 		:not(tfoot) > tr {
 			border-bottom: var(--ri-border);
 		}
 	}
-	/* #endregion */
-
-	/* #region Forms */
 	form:not(:has(fieldset)),
 	fieldset {
 		background-color: var(--ri-card-background);
@@ -427,7 +367,6 @@
 	fieldset {
 		margin-block-start: 1lh;
 	}
-
 	legend {
 		background-color: inherit;
 		border: var(--ri-border);
@@ -439,14 +378,9 @@
 		padding-block-start: 0.5ch;
 		transform: translateY(-50%);
 	}
-
 	label {
-		&:has(+ :is(input, textarea)) {
+		&:has(* + :is(input, textarea)) {
 			margin-block-end: 0.5lh;
-		}
-		&:not(:empty) {
-			display: inline-block;
-			place-items: center;
 		}
 	}
 	select {
@@ -455,34 +389,27 @@
 		border: var(--ri-border);
 		min-block-size: fit-content;
 		padding: var(--ri-spacing);
+		justify-content: center;
+		align-items: center;
 	}
-
 	select:where([multiple]) {
 		max-block-size: 10ch;
-		padding-block: 0;
 		padding-inline: 0;
 	}
-
 	select::picker(select) {
 		appearance: base-select;
 		background-color: var(--ri-background);
 		border-radius: var(--ri-border-radius);
 	}
-
 	input[type='color'] {
 		appearance: none;
-		-moz-appearance: none;
-		-webkit-appearance: none;
 	}
-
 	::-moz-color-swatch {
 		border-radius: var(--ri-border-radius);
 	}
-
 	::-webkit-color-swatch {
 		border-radius: var(--ri-border-radius);
 	}
-
 	textarea,
 	input:not(
 		[type='checkbox'],
@@ -497,14 +424,12 @@
 		max-inline-size: 100%;
 		padding: var(--ri-spacing);
 	}
-
 	textarea {
 		field-sizing: content;
 		min-block-size: 5lh;
 		max-block-size: 10lh;
 		resize: none;
 	}
-
 	:where(input, button, textarea, select) {
 		background-color: var(--ri-input-background-color);
 		border: var(--ri-border);
@@ -513,7 +438,6 @@
 		font: inherit;
 		font-size: inherit;
 	}
-
 	input:where([type='reset'], [type='button'], [type='submit']),
 	button,
 	input::file-selector-button,
@@ -526,38 +450,29 @@
 		padding: var(--ri-spacing);
 		text-decoration: none;
 		text-align: center;
-
 		&.ri-secondary {
 			background-color: var(--ri-text);
-			&:where(:hover, :active, :focus) {
+			&:where(:hover, :active) {
 				background-color: var(--ri-text-muted);
 			}
 		}
 		&:where(:hover, :active) {
 			background-color: var(--ri-accent-hover);
 		}
-
 		&[disabled] {
 			background-color: var(--ri-accent-hover);
 			cursor: not-allowed;
 			pointer-events: none;
 		}
 	}
-	/* #endregion */
-
-	/* #region Media (elements that are replaced content, not surfaces) */
 	:where(img, picture, video, canvas, svg) {
 		block-size: auto;
 		display: block;
 		max-inline-size: 100%;
 	}
-
 	:where(img, picture, video, canvas) {
 		border-radius: var(--ri-border-radius);
 	}
-	/* #endregion */
-
-	/* #region Surfaces (article, aside, dialog, details, blockquote) */
 	:where(article, aside, dialog, details, table) {
 		border-radius: var(--ri-border-radius);
 		justify-content: space-between;
@@ -567,43 +482,17 @@
 		background-color: var(--ri-card-background);
 		color: var(--ri-text);
 	}
-
-	:where(article, dialog, details) {
-		background-color: var(--ri-card-background);
-		color: var(--ri-text);
-	}
-	:where(article, dialog, blockquote) {
-		box-shadow: var(--ri-boxshadow);
-	}
-
-	blockquote {
-		border-end-end-radius: var(--ri-border-radius);
-		border-start-end-radius: var(--ri-border-radius);
-		background-color: var(--ri-header-footer-color);
-		color: var(--ri-text);
-	}
-
 	:where(aside, dialog) {
 		border: var(--ri-border);
 	}
-
 	:where(article, aside, blockquote, dialog) > * {
-		padding-inline: var(--ri-spacing);
-
-		&:where(:first-child, &:last-child) {
-			margin-block: var(--ri-spacing);
-		}
+		padding: var(--ri-spacing);
 	}
-
-	:where(article, dialog) > :where(caption, header, footer) {
+	:where(article, dialog[open]) > :where(caption, header, footer) {
 		background-color: var(--ri-header-footer-color);
 	}
-
 	details {
 		padding-inline: var(--ri-spacing);
-
-		/* first/last padding is intentionally reversed vs. article/aside/dialog
-		   above — it pairs with the ::details-content animation below */
 		:first-child {
 			padding-block-start: var(--ri-spacing);
 		}
@@ -611,12 +500,33 @@
 		:last-child {
 			padding-block-end: var(--ri-spacing);
 		}
-	}
 
+		scroll-behavior: smooth;
+		scroll-padding-top: var(--ri-spacing);
+		scrollbar-gutter: stable;
+		&::details-content {
+			block-size: 0;
+			opacity: 0;
+			overflow: clip;
+			transition-behavior: allow-discrete;
+			transition-duration: 0.2s;
+			transition-property: block-size opacity overlay;
+		}
+		&[open]::details-content {
+			block-size: fit-content;
+			opacity: 1;
+			transition-duration: 0.2s;
+		}
+	}
 	dialog {
 		inset: 0;
 		inline-size: var(--ri-max-width);
 		padding: 0;
+		&::backdrop {
+			background-color: oklch(
+				from var(--ri-input-background-color) l c h / 0.8
+			);
+		}
 	}
 	progress {
 		appearance: none;
@@ -625,72 +535,35 @@
 		border-radius: var(--ri-border-radius);
 		overflow: hidden;
 		width: 100%;
-
 		&[value] {
 			&::-webkit-progress-bar {
 				background: var(--ri-background);
 			}
-
 			&::-webkit-progress-value {
 				background: var(--ri-accent);
 			}
-
 			&::-moz-progress-bar {
 				background: var(--ri-accent);
+				background: transparent;
 			}
 		}
-
 		&:not([value]) {
+			&::-webkit-progress-bar {
+				background: transparent;
+			}
+			&::-moz-progress-bar {
+				background: transparent;
+			}
 			animation: ri-progress 2s infinite linear;
 			background: var(--ri-background)
 				linear-gradient(90deg, transparent 80%, var(--ri-accent) 0);
 			background-position: 200% 0;
 			background-size: 200% 100%;
-
-			&::-webkit-progress-bar {
-				background: transparent;
-			}
-
-			&::-webkit-progress-value {
-				background: transparent;
-			}
-
-			&::-moz-progress-bar {
-				background: transparent;
-			}
 		}
 	}
-
 	@keyframes ri-progress {
 		to {
 			background-position: -200% 0;
 		}
 	}
-
-	/* #endregion */
-
-	/* #region Animations */
-	@media (prefers-reduced-motion: no-preference) {
-		details {
-			scroll-behavior: smooth;
-			scroll-padding-top: var(--ri-spacing);
-			scrollbar-gutter: stable;
-
-			&::details-content {
-				block-size: 0;
-				opacity: 0;
-				overflow: clip;
-				transition-behavior: allow-discrete;
-				transition-duration: 0.2s;
-				transition-property: block-size opacity overlay;
-			}
-
-			&[open]::details-content {
-				block-size: fit-content;
-				opacity: 1;
-				transition-duration: 0.2s;
-			}
-		}
-	}
-	/* #endregion */
 }
