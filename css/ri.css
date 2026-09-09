@@ -36,12 +36,18 @@
 		@media (prefers-color-scheme: dark) {
 			color-scheme: dark;
 		}
-		.ri-light {
+		.ri-theme-light {
 			color-scheme: light;
 		}
 
-		.ri-dark {
-			color-scheme: revert;
+		.ri-theme-dark {
+			color-scheme: dark;
+		}
+
+		@property --ri-color {
+			syntax: '<color>';
+			inherits: true;
+			initial-value: #2f27ce;
 		}
 	}
 
@@ -73,6 +79,7 @@
 	:root,
 	[data-ri-color],
 	[data-ri-hue] {
+		contain: style;
 		--ri-color: var(--ri-custom-color, #2f27ce);
 
 		/* Theming: manual override */
@@ -106,7 +113,7 @@
 			oklch(from var(--ri-color) 0.22 0.01 h)
 		);
 		--ri-shadow-color: light-dark(
-			oklch(from var(--ri-color) 0.6 0.02 h / 0.2),
+			oklch(from var(--ri-color) 0.6 0.02 h / 0.18),
 			oklch(from var(--ri-color) 0.02 0.02 h / 0.6)
 		);
 		--ri-text: light-dark(
@@ -167,19 +174,18 @@
 			);
 			margin-inline: auto;
 		}
-
-		:where(:focus-within, :focus-visible) {
-			outline-color: var(--ri-accent);
-		}
 	}
-	.ri-sans {
+	.ri-font-sans {
 		font-family: var(--ri-sans);
 	}
-	.ri-serif {
+	.ri-font-serif {
 		font-family: var(--ri-serif);
 	}
-	.ri-code {
+	.ri-font-code {
 		font-family: var(--ri-code);
+	}
+	:where(:focus-within, :focus-visible) {
+		outline-color: var(--ri-accent);
 	}
 
 	/* #endregion */
@@ -199,6 +205,7 @@
 		display: flex;
 		flex-direction: column;
 		row-gap: var(--ri-spacing);
+		justify-content: center;
 	}
 
 	:where(body, main, section, article, aside, dialog)
@@ -320,7 +327,7 @@
 	}
 
 	abbr {
-		text-underline-offset: 3px;
+		text-underline-offset: 0.1lh;
 	}
 
 	/* blockquote's  treatment  lives with article/aside/dialog/details */
@@ -341,7 +348,6 @@
 
 	code {
 		background-color: var(--ri-input-background-color);
-		padding-inline-start: var(--ri-spacing);
 	}
 
 	kbd {
@@ -353,7 +359,7 @@
 		background: var(--ri-accent);
 		color: var(--ri-background);
 	}
-	:has(code, kbd, mark) {
+	:has(> :is(code, kbd, mark)) {
 		line-height: 2;
 	}
 
@@ -386,6 +392,7 @@
 
 	table {
 		border-collapse: collapse;
+		width: 100%;
 
 		:where(section, div):has(> &) {
 			overflow-x: auto;
@@ -396,7 +403,7 @@
 			text-align: start;
 			padding: var(--ri-spacing);
 		}
-		:not(thead, tfoot) tr:nth-child(odd) {
+		tbody tr:nth-child(odd) {
 			background-color: var(--ri-header-footer-color);
 		}
 		:not(tfoot) > tr {
@@ -413,10 +420,12 @@
 		border: var(--ri-border);
 		border-radius: var(--ri-border-radius);
 		padding-block: var(--ri-spacing);
+		:has(& > legend) {
+			row-gap: calc(var(--ri-spacing) * 2);
+		}
 	}
-
-	* + fieldset {
-		margin-block-start: var(--ri-spacing);
+	fieldset {
+		margin-block-start: 1lh;
 	}
 
 	legend {
@@ -427,10 +436,19 @@
 		border-start-end-radius: var(--ri-border-radius);
 		margin-inline-start: var(--ri-border-radius);
 		padding-inline: var(--ri-spacing);
-		padding-block: 0.5ch;
+		padding-block-start: 0.5ch;
 		transform: translateY(-50%);
 	}
 
+	label {
+		&:has(+ :is(input, textarea)) {
+			margin-block-end: 0.5lh;
+		}
+		&:not(:empty) {
+			display: inline-block;
+			place-items: center;
+		}
+	}
 	select {
 		appearance: base-select;
 		background-color: var(--ri-input-background-color);
@@ -441,8 +459,8 @@
 
 	select:where([multiple]) {
 		max-block-size: 10ch;
-		padding-block: none;
-		padding-inline: none;
+		padding-block: 0;
+		padding-inline: 0;
 	}
 
 	select::picker(select) {
@@ -515,7 +533,7 @@
 				background-color: var(--ri-text-muted);
 			}
 		}
-		&:where(:hover, :active, :focus) {
+		&:where(:hover, :active) {
 			background-color: var(--ri-accent-hover);
 		}
 
@@ -554,7 +572,7 @@
 		background-color: var(--ri-card-background);
 		color: var(--ri-text);
 	}
-	:where(article, dialog) {
+	:where(article, dialog, blockquote) {
 		box-shadow: var(--ri-boxshadow);
 	}
 
@@ -573,7 +591,7 @@
 		padding-inline: var(--ri-spacing);
 
 		&:where(:first-child, &:last-child) {
-			padding-block: var(--ri-spacing);
+			margin-block: var(--ri-spacing);
 		}
 	}
 
