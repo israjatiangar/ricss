@@ -474,9 +474,14 @@
 			}
 		}
 		&:not([value]) {
+			&::-webkit-progress-bar {
+				background: transparent;
+			}
+			&::-moz-progress-bar {
+				background: transparent;
+			}
 			animation: ri-progress 2s infinite linear;
-			background:
-				var(--ri-background),
+			background: var(--ri-background)
 				linear-gradient(90deg, transparent 80%, var(--ri-accent) 0);
 			background-position: 200% 0;
 			background-size: 200% 100%;
