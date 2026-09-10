@@ -4,6 +4,7 @@
 		--ri-article-width: 80ch;
 		--ri-border-size: 2px;
 		--ri-border-style: solid;
+		--ri-color: #2f27ce;
 		--ri-font-size: 1rem;
 		--ri-font-weight: 400;
 		--ri-full-width: 1200px;
@@ -54,8 +55,6 @@
 	:root,
 	[data-ri-color],
 	[data-ri-hue] {
-		contain: style;
-		--ri-color: var(--ri-custom-color, #2f27ce);
 		--ri-accent: light-dark(
 			oklch(from var(--ri-color) 60% 0.2 h),
 			oklch(from var(--ri-color) 60% 0.16 h)
@@ -98,10 +97,10 @@
 		--ri-quote: calc(var(--ri-border-size) * 3) solid var(--ri-border-color);
 	}
 	[data-ri-color] {
-		--ri-custom-color: attr(data-ri-color type(<color>));
+		--ri-color: attr(data-ri-color type(<color>), #2f27ce);
 	}
 	[data-ri-hue] {
-		--ri-custom-color: oklch(55% 0.3 var(--ri-hue, 272));
+		--ri-color: oklch(55% 0.3 var(--ri-hue, 272));
 		--ri-hue: attr(data-ri-hue type(<number>));
 	}
 }
