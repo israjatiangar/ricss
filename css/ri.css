@@ -2,6 +2,8 @@
 	:root {
 		interpolate-size: allow-keywords;
 		--ri-article-width: 80ch;
+		--ri-border-size: 2px;
+		--ri-border-style: solid;
 		--ri-font-size: 1rem;
 		--ri-font-weight: 400;
 		--ri-full-width: 1200px;
@@ -29,13 +31,6 @@
 			color-scheme: light;
 		}
 		@media (prefers-color-scheme: dark) {
-			color-scheme: dark;
-		}
-		.ri-theme-light {
-			color-scheme: light;
-		}
-
-		.ri-theme-dark {
 			color-scheme: dark;
 		}
 	}
@@ -98,8 +93,6 @@
 			oklch(from var(--ri-color) 60% 0.02 h)
 		);
 
-		--ri-border-size: 2px;
-		--ri-border-style: solid;
 		--ri-border: var(--ri-border-size) var(--ri-border-style)
 			var(--ri-border-color);
 		--ri-quote: calc(var(--ri-border-size) * 3) solid var(--ri-border-color);
@@ -138,15 +131,6 @@
 			margin-inline: auto;
 		}
 	}
-	.ri-font-sans {
-		font-family: var(--ri-sans);
-	}
-	.ri-font-serif {
-		font-family: var(--ri-serif);
-	}
-	.ri-font-code {
-		font-family: var(--ri-code);
-	}
 	:is(:focus, :focus-within, :focus-visible) {
 		outline-color: var(--ri-accent);
 	}
@@ -173,8 +157,7 @@
 	footer {
 		padding-block: var(--ri-spacing);
 	}
-	header,
-	:not(header) > :is(h1, h2, h3) {
+	header {
 		border-block-end: var(--ri-border);
 	}
 	footer {
@@ -184,17 +167,6 @@
 		border: none;
 		border-block-end: var(--ri-border);
 		margin-block: var(--ri-spacing);
-	}
-	.ri-grid-fixed,
-	.ri-grid-flex {
-		display: grid;
-		gap: var(--ri-spacing);
-	}
-	.ri-grid-flex {
-		grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
-	}
-	.ri-grid-fixed {
-		grid-template-columns: repeat(auto-fill, minmax(30ch, 1fr));
 	}
 	nav {
 		align-items: center;
@@ -574,6 +546,34 @@
 			background-size: 200% 100%;
 		}
 	}
+	.ri-theme-light {
+		color-scheme: light;
+	}
+
+	.ri-theme-dark {
+		color-scheme: dark;
+	}
+	.ri-font-sans {
+		font-family: var(--ri-sans);
+	}
+	.ri-font-serif {
+		font-family: var(--ri-serif);
+	}
+	.ri-font-code {
+		font-family: var(--ri-code);
+	}
+	.ri-grid-fixed,
+	.ri-grid-flex {
+		display: grid;
+		gap: var(--ri-spacing);
+	}
+	.ri-grid-flex {
+		grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+	}
+	.ri-grid-fixed {
+		grid-template-columns: repeat(auto-fill, minmax(30ch, 1fr));
+	}
+
 	@keyframes ri-progress {
 		to {
 			background-position: -200% 0;
