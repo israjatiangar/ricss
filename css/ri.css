@@ -58,10 +58,15 @@
 			var(--ri-border-color);
 		--ri-quote: calc(var(--ri-border-size) * 3) solid var(--ri-border-color);
 	}
-}
-@layer riStyle {
-	:is(*, *::before, *::after) {
+	*,
+	::before,
+	::after {
 		box-sizing: border-box;
+	}
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-inline-start: var(--ri-spacing);
+		scrollbar-gutter: stable;
 	}
 	body {
 		--ri-max-width: min(1200px, calc(100% - var(--ri-spacing)));
@@ -80,32 +85,30 @@
 		-webkit-text-size-adjust: 100%;
 		padding-inline: var(--ri-spacing);
 	}
-	:focus-visible {
+	:focus {
 		outline-color: var(--ri-accent);
 	}
-	:is(
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6,
-		p,
-		ul,
-		ol,
-		dl,
-		figure,
-		article,
-		aside,
-		blockquote,
-		pre,
-		table,
-		form,
-		fieldset,
-		details,
-		summary,
-		hr
-	) {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	ul,
+	ol,
+	dl,
+	figure,
+	article,
+	aside,
+	blockquote,
+	pre,
+	table,
+	form,
+	fieldset,
+	details,
+	summary,
+	hr {
 		margin-block: var(--ri-spacing);
 	}
 	header,
@@ -147,14 +150,24 @@
 			font-size: 125%;
 		}
 	}
-	:is(h1, h2, h3, h4, h5, h6) {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		font-weight: var(--ri-heading-weight);
 		hyphens: auto;
 		overflow-wrap: break-word;
 		text-box-trim: trim-both;
 		text-wrap: balance;
 	}
-	:is(tfoot, thead, figcaption, caption, summary, dt) {
+	tfoot,
+	thead,
+	figcaption,
+	caption,
+	summary,
+	dt {
 		font-weight: var(--ri-heading-weight);
 	}
 	h1 {
@@ -210,7 +223,7 @@
 	}
 	code {
 		color: var(--ri-accent);
-		color-scheme: revert;
+		user-select: all;
 		background: var(--ri-input-background-color);
 	}
 	pre {
@@ -218,13 +231,13 @@
 		border-radius: var(--ri-border-radius);
 		overflow-x: auto;
 		padding: var(--ri-spacing);
-		tab-size: 2;
 		white-space: pre;
+		code {
+			background: none;
+			padding: 0;
+		}
 	}
-	pre code {
-		background: none;
-		padding: 0;
-	}
+
 	kbd {
 		background: var(--ri-text);
 		color: var(--ri-background);
@@ -233,7 +246,10 @@
 		background: var(--ri-accent);
 		color: var(--ri-background);
 	}
-	:is(small, figcaption, caption, del) {
+	small,
+	figcaption,
+	caption,
+	del {
 		color: var(--ri-text-muted);
 	}
 	small,
@@ -245,9 +261,13 @@
 	}
 	b,
 	strong,
-	summary,
-	:not(body) > header {
+	summary {
 		font-weight: 700;
+	}
+	dl,
+	ol,
+	li {
+		padding-inline-start: 2ch;
 	}
 	table {
 		border-collapse: collapse;
@@ -256,19 +276,16 @@
 			overflow-x: auto;
 			border-radius: var(--ri-border-radius);
 		}
-
-		:is(th, td) {
+		th,
+		td {
 			text-align: start;
 			padding: var(--ri-spacing);
 		}
-
 		:not(tfoot) > tr {
-			border-bottom: var(--ri-border);
+			border-block-end: var(--ri-border);
 		}
-
 		tbody tr {
 			background: var(--ri-header-footer-color);
-
 			&:nth-child(odd) {
 				background-color: var(--ri-border-color);
 			}
@@ -297,8 +314,7 @@
 		:has(& > legend) {
 			row-gap: calc(var(--ri-spacing) * 2);
 		}
-
-		* {
+		> * {
 			margin: 0;
 		}
 	}
@@ -321,18 +337,16 @@
 		padding: var(--ri-spacing);
 		justify-content: center;
 		align-items: center;
-	}
-	select:is([multiple]) {
-		max-block-size: 10ch;
-		padding-inline: 0;
-	}
-	select::picker(select) {
-		appearance: base-select;
-		background: var(--ri-background);
-		border-radius: var(--ri-border-radius);
-	}
-	input[type='color'] {
-		appearance: none;
+
+		&:is([multiple]) {
+			max-block-size: 10ch;
+			padding-inline: 0;
+		}
+		&::picker(select) {
+			appearance: base-select;
+			background: var(--ri-background);
+			border-radius: var(--ri-border-radius);
+		}
 	}
 	::-moz-color-swatch {
 		border-radius: var(--ri-border-radius);
@@ -360,7 +374,10 @@
 		max-block-size: 10lh;
 		resize: none;
 	}
-	:is(input, button, textarea, select) {
+	input,
+	button,
+	textarea,
+	select {
 		background: var(--ri-input-background-color);
 		border: var(--ri-border);
 		border-radius: var(--ri-border-radius);
@@ -384,8 +401,10 @@
 			background: var(--ri-text);
 			&:is(:hover, :active) {
 				background: var(--ri-text-muted);
-				background: var(--ri-accent-hover);
 			}
+		}
+		&:is(:hover, :active) {
+			background: var(--ri-accent-hover);
 		}
 		&[disabled] {
 			background: var(--ri-accent-hover);
@@ -393,27 +412,44 @@
 			pointer-events: none;
 		}
 	}
-	:is(img, picture, video, canvas, svg) {
+	img,
+	picture,
+	video,
+	canvas,
+	svg {
 		block-size: auto;
 		display: block;
 		max-inline-size: 100%;
 	}
-	:is(img, picture, video, canvas) {
+	img,
+	picture,
+	video,
+	canvas {
 		border-radius: var(--ri-border-radius);
-		:is(article, aside, blockquote, dialog) > :not(&) {
+	}
+	article,
+	dialog,
+	details,
+	table {
+		background: var(--ri-card-background);
+		color: var(--ri-text);
+	}
+	article,
+	dialog,
+	details,
+	table,
+	aside {
+		padding: 0;
+		border-radius: var(--ri-border-radius);
+		justify-content: space-between;
+		overflow: clip;
+		&:not(details) > * {
 			padding: var(--ri-spacing);
 		}
 	}
-	:is(article, dialog, details, table) {
-		background: var(--ri-card-background);
-		color: var(--ri-text);
-		:is(&, aside) {
-			border-radius: var(--ri-border-radius);
-			justify-content: space-between;
-			overflow: clip;
-		}
-	}
-	:is(aside, dialog) {
+
+	aside,
+	dialog {
 		border: var(--ri-border);
 	}
 	aside {
@@ -432,10 +468,6 @@
 		:last-child {
 			padding-block-end: var(--ri-spacing);
 		}
-
-		scroll-behavior: smooth;
-		scroll-padding-top: var(--ri-spacing);
-		scrollbar-gutter: stable;
 		&::details-content {
 			block-size: 0;
 			opacity: 0;
@@ -487,15 +519,6 @@
 			background-size: 200% 100%;
 		}
 	}
-	.ri-width-article {
-		--ri-max-width: min(80ch, calc(100% - var(--ri-spacing)));
-	}
-	.ri-theme-light {
-		color-scheme: light;
-	}
-	.ri-theme-dark {
-		color-scheme: dark;
-	}
 	.ri-font-sans {
 		font-family: var(--ri-sans);
 	}
@@ -505,16 +528,14 @@
 	.ri-font-code {
 		font-family: var(--ri-code);
 	}
-	.ri-grid-fixed,
-	div {
+	.ri-grid-fix,
+	.ri-grid {
 		display: grid;
 		gap: var(--ri-spacing);
 		align-items: start;
-	}
-	div {
 		grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
 	}
-	.ri-grid-fixed {
+	.ri-grid-fix {
 		grid-template-columns: repeat(auto-fill, minmax(30ch, 1fr));
 	}
 	.ri-rounded-min {
@@ -525,6 +546,15 @@
 	}
 	.ri-rounded-max {
 		--ri-border-radius: 1.5rem;
+	}
+	.ri-theme-light {
+		color-scheme: light;
+	}
+	.ri-theme-dark {
+		color-scheme: dark;
+	}
+	.ri-width-article {
+		--ri-max-width: min(80ch, calc(100% - var(--ri-spacing)));
 	}
 	@keyframes ri-progress {
 		to {
