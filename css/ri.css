@@ -1,20 +1,21 @@
+/*!
+* ricss v1.0 (c) 2026 Iangar Rajat Ravi — MIT License
+*/
 :root {
 	interpolate-size: allow-keywords;
 	--ri-border-size: 2px;
 	--ri-border-radius: 0.5rem;
-	--ri-color: #33f;
 	--ri-heading-weight: 700;
 	--ri-spacing: 1rem;
-	--ri-sans:
-		system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI', roboto,
-		helvetica, arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-	--ri-serif:
-		ui-serif, 'Iowan Old Style', 'Apple Garamond', baskerville,
-		'Palatino Linotype', palatino, century schoolbook, 'Times New Roman',
-		serif;
-	--ri-code:
-		ui-monospace, sfmono-regular, menlo, monaco, consolas,
-		'Liberation Mono', 'Courier New', monospace;
+	--ri-sans: system-ui, sans-serif;
+	--ri-serif: ui-serif, serif;
+	--ri-code: ui-monospace, monospace;
+	color-scheme: light dark;
+}
+:root,
+[data-ri-hue],
+[data-ri-color] {
+	--ri-color: #22b;
 	--ri-accent: light-dark(
 		oklch(from var(--ri-color) 60% 0.2 h),
 		oklch(from var(--ri-color) 60% 0.16 h)
@@ -52,7 +53,12 @@
 		oklch(from var(--ri-color) 60% 0.02 h)
 	);
 	--ri-border: var(--ri-border-size) solid var(--ri-border-color);
-	color-scheme: light dark;
+}
+[data-ri-color] {
+	--ri-color: attr(data-ri-color type(<color>), #33f);
+}
+[data-ri-hue] {
+	--ri-color: oklch(0 0 attr(data-ri-hue type(<number>), 240));
 }
 *,
 ::before,
@@ -68,14 +74,13 @@ html {
 	scrollbar-gutter: stable;
 }
 body {
-	--ri-max-width: min(80ch, calc(100% - var(--ri-spacing)));
+	--ri-max-width: min(80ch, 100%);
 	tab-size: 2;
 	accent-color: var(--ri-accent);
 	background: var(--ri-background);
 	color: var(--ri-text);
 	font-family: var(--ri-sans);
 	font-weight: 400;
-	-webkit-font-smoothing: antialiased;
 	line-height: 1.5;
 	min-block-size: 100svh;
 	margin-inline: auto;
@@ -112,12 +117,15 @@ hr {
 header,
 footer {
 	padding-block: var(--ri-spacing);
+	background-color: inherit;
 }
 header {
 	border-block-end: var(--ri-border);
+	margin-block-end: var(--ri-spacing);
 }
 footer {
 	border-block-start: var(--ri-border);
+	margin-block-start: var(--ri-spacing);
 }
 hr {
 	border: none;
@@ -129,6 +137,12 @@ a {
 }
 a:hover {
 	text-decoration: underline;
+}
+dd,
+ol,
+ul {
+	list-style-position: inside;
+	padding-inline-start: 2ch;
 }
 nav {
 	display: flex;
@@ -193,9 +207,15 @@ h5 {
 h6 {
 	font-size: 125%;
 }
-p {
+p,
+legend,
+small,
+figcaption,
+caption {
 	hyphens: auto;
 	overflow-wrap: break-word;
+	text-box-trim: trim-both;
+	text-wrap: pretty;
 }
 abbr,
 ins {
@@ -204,6 +224,7 @@ ins {
 blockquote {
 	border-inline-start: calc(var(--ri-border-size) * 3) solid
 		var(--ri-border-color);
+	border-radius: var(--ri-border-radius);
 	color: var(--ri-text);
 	font-family: var(--ri-serif);
 	padding-block: var(--ri-spacing);
@@ -219,13 +240,13 @@ pre {
 }
 code,
 kbd {
+	display: inline-block;
 	border-radius: var(--ri-border-radius);
 	font-family: var(--ri-code);
-	padding: 0.25lh;
+	padding-inline: 0.2lh;
 }
 code {
 	color: var(--ri-accent);
-	user-select: all;
 	background: var(--ri-input-background-color);
 }
 pre {
@@ -235,7 +256,7 @@ pre {
 	padding: var(--ri-spacing);
 	white-space: pre;
 	code {
-		background: none;
+		background: transparent;
 		padding: 0;
 	}
 }
@@ -263,12 +284,6 @@ caption,
 figcaption {
 	font-size: 80%;
 }
-dl,
-ol,
-ul {
-	list-style-position: inside;
-	padding-inline-start: 2ch;
-}
 table {
 	border-collapse: collapse;
 	inline-size: 100%;
@@ -281,24 +296,26 @@ table {
 		text-align: start;
 		padding: var(--ri-spacing);
 	}
-	:not(tfoot) > tr {
+	tbody tr:nth-child(odd) {
+		background-color: var(--ri-header-footer-color);
+	}
+	thead {
 		border-block-end: var(--ri-border);
 	}
-	tbody tr {
-		background: var(--ri-header-footer-color);
-		&:nth-child(odd) {
-			background-color: var(--ri-border-color);
-		}
+	tfoot {
+		border-block-start: var(--ri-border);
 	}
 }
 form:not(:has(fieldset)),
 fieldset {
-	display: flex;
-	flex-direction: column;
 	background: var(--ri-card-background);
-	color: var(--ri-text);
 	border: var(--ri-border);
 	border-radius: var(--ri-border-radius);
+	color: var(--ri-text);
+	display: flex;
+	flex-direction: column;
+	gap: var(--ri-spacing);
+
 	padding: var(--ri-spacing);
 	:has(& > legend) {
 		row-gap: calc(var(--ri-spacing) * 2);
@@ -318,15 +335,6 @@ legend {
 	padding-inline: var(--ri-spacing);
 	padding-block-start: 0.5ch;
 	transform: translateY(-50%);
-}
-label {
-	display: block;
-	&:has(+ :is(input, textarea, select)) {
-		margin-block-end: calc(var(--ri-spacing) * -1);
-	}
-	:is(input, textarea, select) {
-		margin-block: var(--ri-spacing);
-	}
 }
 select {
 	appearance: base-select;
@@ -382,6 +390,26 @@ select {
 	color: var(--ri-text);
 	font: inherit;
 	font-size: inherit;
+	label :is(&) {
+		margin-top: 1rem;
+	}
+	label:has(&) {
+		margin: 0;
+	}
+	&:user-invalid {
+		border-color: red;
+	}
+	&:user-valid {
+		border-color: var(--ri-accent-hover);
+	}
+	& + .ri-invalid {
+		display: none;
+		color: red;
+		margin-block-start: -1lh;
+	}
+	&:user-invalid + .ri-invalid {
+		display: inline-block;
+	}
 }
 input:is([type='reset'], [type='button'], [type='submit']),
 button,
@@ -397,11 +425,11 @@ input::file-selector-button,
 	text-align: center;
 	&.ri-secondary {
 		background: var(--ri-text);
-		&:is(:hover, :active) {
+		&:hover {
 			background: var(--ri-text-muted);
 		}
 	}
-	&:is(:hover, :active) {
+	&:hover {
 		background: var(--ri-accent-hover);
 		text-decoration: none;
 	}
@@ -433,7 +461,6 @@ table,
 aside {
 	padding: 0;
 	border-radius: var(--ri-border-radius);
-	justify-content: space-between;
 	overflow: clip;
 	&:not(aside) {
 		background: var(--ri-card-background);
@@ -459,7 +486,7 @@ details {
 		padding-block-start: var(--ri-spacing);
 		display: list-item;
 	}
-	:last-child {
+	> :last-child {
 		padding-block-end: var(--ri-spacing);
 	}
 	&::details-content {
@@ -474,11 +501,15 @@ details {
 	}
 }
 dialog {
-	position: fixed;
 	inline-size: var(--ri-max-width);
+	opacity: 1;
+	position: fixed;
 	&::backdrop {
 		background: #000;
-		opacity: 80%;
+		opacity: 0.8;
+	}
+	@starting-style {
+		opacity: 0;
 	}
 }
 progress {
@@ -536,5 +567,5 @@ progress {
 	color-scheme: dark;
 }
 .ri-width-full {
-	--ri-max-width: min(1200px, calc(100% - var(--ri-spacing)));
+	--ri-max-width: min(1200px, 100%);
 }
