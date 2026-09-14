@@ -25,7 +25,7 @@
 		oklch(from var(--ri-color) 48% 0.16 h)
 	);
 	--ri-background: light-dark(
-		oklch(from var(--ri-color) 98% 0.01 h),
+		oklch(from var(--ri-color) 99% 0.01 h),
 		oklch(from var(--ri-color) 14% 0.01 h)
 	);
 	--ri-border-color: light-dark(
