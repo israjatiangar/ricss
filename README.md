@@ -10,12 +10,15 @@ Made with Pure CSS (It's more than good nowadays)
 
 ## Features
 
-- **Per-element colors:** Give any element its own hue from the full wheel —
+- **Per-element colors:** Give any element its own hue from the full color wheel;
   everything still looks like it belongs together.
 - **Highly customizable:** More flexible than most classless CSS frameworks.
 - **Dark/light themes:** With per-element control.
 - **Flexible layouts:** Two responsive layouts, three corner styles.
 - **CSS variables:** Easy to override (_I did it, and so can you!_)
+- **Lightweight:** Under 9kb Un-minified and under 2.5kb compressed [^1]
+
+[^1]: Browsers compress CSS over the network, so its more like under 2.5kbs.
 
 ## Should you use it
 
@@ -52,7 +55,7 @@ Download the release and link it in your html.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).
 
 ---
 

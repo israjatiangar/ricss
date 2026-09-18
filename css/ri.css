@@ -21,8 +21,8 @@
 		oklch(from var(--ri-color) 60% 0.16 h)
 	);
 	--ri-accent-hover: light-dark(
-		oklch(from var(--ri-color) 66% 0.22 h),
-		oklch(from var(--ri-color) 48% 0.16 h)
+		oklch(from var(--ri-color) 52% 0.2 h),
+		oklch(from var(--ri-color) 52% 0.16 h)
 	);
 	--ri-background: light-dark(
 		oklch(from var(--ri-color) 99% 0.01 h),
