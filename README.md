@@ -74,4 +74,4 @@ MIT - see [LICENSE](LICENSE).
 
 Made with :heart: by [Rajat Iangar](https://github.com/israjatiangar)
 
-`🤖 was used in making of this project`
+`🤖 used to CSS Cleanup and draft this README`
