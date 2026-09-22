@@ -8,6 +8,8 @@ project.
 
 Made with Pure CSS (It's more than good nowadays)
 
+[See riCss in action](https://israjatiangar.github.io/ricss/)
+
 ## Features
 
 - **Per-element colors:** Give any element its own hue from the full color
