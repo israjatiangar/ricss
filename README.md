@@ -1,38 +1,37 @@
 # 🍚 Ri CSS
 
-Pronounced like _recess_, this is a minimal, quazi-classless CSS framework that
-gives you a break from writing CSS.
+Pronounced like _recess_, this is a minimal, quazi-classless CSS framework\
+that gives you a break from writing CSS.
 
-A drop-in stylesheet you can set and forget, so you can focus on building your
-actual project.
+A stylesheet you can set and forget, so you can focus on building your actual
+project.
 
 Made with Pure CSS (It's more than good nowadays)
 
 ## Features
 
-- **Per-element colors:** Give any element its own hue from the full color wheel;
-  everything still looks like it belongs together.
+- **Per-element colors:** Give any element its own hue from the full color
+  wheel; everything still looks like it belongs together.
 - **Highly customizable:** More flexible than most classless CSS frameworks.
 - **Dark/light themes:** With per-element control.
 - **Flexible layouts:** Two responsive layouts, three corner styles.
 - **CSS variables:** Easy to override (_I did it, and so can you!_)
-- **Lightweight:** Under 9kb Un-minified and under 2.5kb compressed [^1]
-
-[^1]: Browsers compress CSS over the network, so its more like under 2.5kbs.
+- **Lightweight:** All that goodies under 9kb (_Non-minified_).
 
 ## Should you use it
 
 Why not? Its free!
 
-- Blogs & Articles
+**What this is great for:**
 
+- Simple Blogs & Articles
 - Documentation
-
+- Rapid Prototyping
 - Markdown
 
 ## Why I made this
 
-Classless css frameworks are easy to use, but provide little customisability.
+Classless css frameworks are easy to use, but provide little customisability.\
 Normal css frameworks are provide good customisability, but are tedious.
 
 I wanted something that is easy to use, yet fairly customisable.\
@@ -59,6 +58,6 @@ MIT - see [LICENSE](LICENSE).
 
 ---
 
-Made with :heart: by [Rajat Iangar](https://github.com/israjatiangar)\
+Made with :heart: by [Rajat Iangar](https://github.com/israjatiangar)
 
 `🤖 was used in making of this project`

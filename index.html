@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			rel="icon"
+			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75'>🍚</text></svg>" />
+		<title>Ri CSS | Demo</title>
+		<meta
+			name="description"
+			content="A Demo for ricss (A quasi classless css)" />
+
+		<link rel="stylesheet" href="css/ri.css" />
+		<style>
+			#toTop {
+				transition-property: all;
+				position: fixed;
+				bottom: 1rem;
+				right: 1rem;
+				animation: --fadeIn linear;
+
+				animation-timeline: scroll();
+			}
+			@keyframes --fadeIn {
+				0%,
+				5% {
+					pointer-events: none;
+					opacity: 0;
+				}
+				10%,
+				100% {
+					pointer-events: all;
+					opacity: 1;
+				}
+			}
+		</style>
+	</head>
+	<body id="Top">
+		<header align="center" class="sticky">
+			<nav>
+				<strong><a href=""> 🍚 Ri CSS </a> </strong>
+				<menu>
+					<li>
+						<a href="" role="button">Github</a>
+					</li>
+				</menu>
+			</nav>
+		</header>
+		<main>
+			<section>
+				<h2>How to use</h2>
+			</section>
+
+			<section class="Chapters">
+				<aside>
+					<header>Chapters</header>
+					<ol>
+						<li>
+							<a href="#Typography">Typography</a>
+						</li>
+						<li>
+							<a href="#Lists">Lists</a>
+						</li>
+						<li>
+							<a href="#Forms_And_Tables">Forms And Tables</a>
+						</li>
+						<li>
+							<a href="#Cards_And_Grids">Cards And Grids</a>
+						</li>
+						<li>
+							<a href="#Aside_Details_Dialogs">
+								Aside, Details and Dialog
+							</a>
+						</li>
+						<li>
+							<a href="#Themes"> Themes </a>
+						</li>
+					</ol>
+				</aside>
+			</section>
+			<section class="Controls">
+				<form name="theme_control">
+					<fieldset>
+						<legend>Theme Controls</legend>
+						<label for="mode">Pick Theme</label>
+						<select name="mode" onchange="toggleMode()">
+							<option value="0" selected>Auto</option>
+							<option value="1">Dark Mode</option>
+							<option value="2">Light Mode</option>
+						</select>
+						<label for="font">Pick a Font</label>
+						<select name="font" onchange="toggleFont()">
+							<option value="0" selected>Sans Serif</option>
+							<option value="1">Serif</option>
+							<option value="2">Monospace</option>
+						</select>
+						<fieldset onchange="toggleRound()">
+							<legend>Roundedness</legend>
+							<label>
+								<input name="round" type="radio" value="0" />
+								None
+							</label>
+							<label>
+								<input
+									name="round"
+									type="radio"
+									value="1"
+									checked />
+								Min
+							</label>
+							<label>
+								<input name="round" type="radio" value="2" />
+								Max
+							</label>
+						</fieldset>
+						<label for="Hue">Change Page Hue:</label>
+						<input
+							id="Hue"
+							type="range"
+							name="hue"
+							min="0"
+							value="240"
+							max="360"
+							oninput="toggleHue()" />
+						<button type="button" onclick="toggleWidth()">
+							Toggle Width
+						</button>
+					</fieldset>
+				</form>
+			</section>
+			<section id="Typography">
+				<h2>Typography</h2>
+				<hr />
+				<h1>Heading 1</h1>
+				<h2>Heading 2</h2>
+				<h3>Heading 3</h3>
+				<h4>Heading 4</h4>
+				<h5>Heading 5</h5>
+				<h6>Heading 6</h6>
+				<hr />
+				<p>This are example Paragraphs</p>
+				<p>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit.
+					Vitae exercitationem quae voluptates hic sunt sit libero
+					eaque nisi eos minima.
+				</p>
+				<p>
+					The report was <i>preliminary</i> in scope, <b>final</b> in
+					name, <u>underlined</u> per formatting guidelines, and
+					<mark>highlighted</mark> for review, though the review
+					<s>occurred</s> did not occur before submission.
+				</p>
+				<p>
+					Section 4 <del>approved</del> <ins>resubmitted</ins>; the
+					form still requires <kbd>Ctrl</kbd> + <kbd>Z</kbd> more
+					often than <kbd>Ctrl</kbd> + <kbd>S</kbd>, per the standard
+					build process:
+					<code> while (build != stable) revert();</code>
+				</p>
+				<p>
+					For the server to reach a ready state<sup>1</sup>, consult
+					the
+					<abbr title="Standard Operating Procedure">SOP</abbr>;
+					<small>see section 12</small>, or
+					<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+						>click here</a
+					>
+					for the complete instructions.
+				</p>
+				<p>No one likes the HR but here it is:</p>
+				<hr />
+				<b>Normal Blockquote:</b>
+				<blockquote>
+					Junior devs don't understand, <br />
+					If I had more time, I would have written less code
+					<hr />
+					- Mark Twain
+				</blockquote>
+				<b>Code Example:</b>
+				<pre><code>for (let i = 1; i < 20; i++) {
+	let say = ''
+	i % 5 === 0 ? (say += 'Fizzy') : ''
+	i % 3 === 0 ? (say += 'Buzzy') : ''
+	say = say === "" ? String(i) : say
+	console.log(say)
+}</code></pre>
+			</section>
+			<section id="Lists">
+				<h2>Lists</h2>
+				<hr />
+				<h3>Ordered List</h3>
+				<ol>
+					<li>Wake Up</li>
+					<li>Question Life</li>
+					<li>Go to Bed</li>
+				</ol>
+				<h3>Unordered List</h3>
+				<ul>
+					<li>Make a Tea</li>
+					<ul>
+						<li>With Ginger</li>
+						<li>Or Cardomom</li>
+					</ul>
+					<li>Question Life</li>
+					<li>Go to Bed</li>
+				</ul>
+				<h3>Definition List</h3>
+				<dl>
+					<dt>Me</dt>
+					<dd>Someone who is an idiot</dd>
+					<dt>You</dt>
+					<dd>An Idiot who is reading this</dd>
+					<dt>Others</dt>
+					<dd>World is full of idiots, thus it's fun.</dd>
+				</dl>
+			</section>
+			<section id="Forms_And_Tables">
+				<h2>Forms And Table</h2>
+				<hr />
+				<form name="Example">
+					<fieldset>
+						<legend>This is a Legend</legend>
+						<label for="name">
+							Input within a Label
+							<input id="name" type="text" name="name" required />
+						</label>
+						<label for="pass"> Separate label & input: </label>
+						<input id="pass" type="password" name="pass" required />
+
+						<label> Select </label>
+						<select>
+							<option value="" default>Select One Option</option>
+
+							<option value="">Option A</option>
+							<option value="">Option B</option>
+							<option value="">Option C</option>
+						</select>
+
+						<fieldset>
+							<legend>Pick a Fruit</legend>
+							<label for="">
+								<input name="check" type="checkbox" />
+								Pineapples are Good
+							</label>
+							<label for="">
+								<input name="check" type="checkbox" />
+								Bananas are Bad
+							</label>
+						</fieldset>
+
+						<fieldset>
+							<legend>Yes or No?</legend>
+							<label>
+								<input
+									name="example"
+									type="radio"
+									value="0"
+									required />
+								Yes
+							</label>
+							<label>
+								<input name="example" type="radio" value="1" />
+								No
+							</label>
+						</fieldset>
+
+						<small>Click reset to remove validation</small>
+						<div>
+							<button>Submit</button>
+							<button class="ri-secondary" type="reset">
+								Reset
+							</button>
+						</div>
+					</fieldset>
+					<button>This is a button</button>
+					<a href="" role="button">
+						This is a link with role="button"
+					</a>
+					<button type="button" class="ri-secondary">
+						class of ri-secondary
+					</button>
+				</form>
+				<div>
+					<table>
+						<caption>
+							This is the Caption For the Table Below
+						</caption>
+						<thead>
+							<tr>
+								<th>Product</th>
+								<th>Price</th>
+								<th>In Stock</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Notebook</td>
+								<td>2000 ɫ</td>
+								<td>No</td>
+							</tr>
+							<tr>
+								<td>Pencil</td>
+								<td>100 ɫ</td>
+								<td>No</td>
+							</tr>
+							<tr>
+								<td>Pen</td>
+								<td>500 ɫ</td>
+								<td>No</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td>Total</td>
+								<td>2600 ɫ</td>
+								<td>---</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</section>
+			<section id="Cards_And_Grids">
+				<h2>Cards and Grids</h2>
+				<hr />
+				<h3>Normal Grid</h3>
+				<div class="ri-grid">
+					<article>
+						<header>Article Header</header>
+						<div>Short example content for this card.</div>
+						<footer>Article Footer</footer>
+					</article>
+					<article>
+						<div>
+							<img
+								src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Breil-Brigels._%28actm%29_02.jpg/330px-Breil-Brigels._%28actm%29_02.jpg"
+								alt=""
+								width="100%" />
+						</div>
+						<div>Short example content for this card.</div>
+						<footer>
+							<a
+								href="https://commons.wikimedia.org/wiki/File:Breil-Brigels._(actm)_02.jpg"
+								>Agnes Monkelbaan</a
+							>,
+							<a
+								href="https://creativecommons.org/licenses/by-sa/4.0"
+								>CC BY-SA 4.0</a
+							>, via Wikimedia Commons
+						</footer>
+					</article>
+				</div>
+				<h3>Grid with a fixed layout</h3>
+				<p>
+					using the class <code>ri-grid-fix</code>, columns stay a
+					fixed width instead of auto-resizing
+					<br />
+					<small>
+						try "Toggle Width" above for a clearer comparison
+					</small>
+				</p>
+				<div class="ri-grid-fix">
+					<article>
+						<header>Article Header</header>
+						<div>Short example content for this card.</div>
+						<footer>Article Footer</footer>
+					</article>
+				</div>
+			</section>
+			<section id="Aside_Details_Dialogs">
+				<h2>Aside, Dialogs and Details</h2>
+				<hr />
+				<h3>Aside</h3>
+				<aside>
+					<p>
+						An aside with no header or footer, good for tangential
+						notes.
+					</p>
+				</aside>
+				<h3>Details</h3>
+
+				<details name="details">
+					<summary>This is a summary inside details</summary>
+					<p>Click a summary to expand its details</p>
+					<footer>
+						<a
+							href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details">
+							Learn More
+						</a>
+					</footer>
+				</details>
+				<details name="details">
+					<summary>Connect Details with name Attribute</summary>
+					<p>
+						Same <code>name</code> attribute groups these together.
+					</p>
+				</details>
+				<br />
+				<button
+					onclick="
+						document.getElementById('Example_Dialog').showModal()
+					">
+					Show Dialog Box
+				</button>
+				<dialog id="Example_Dialog">
+					<header>
+						<h3>This is an Example Dialog</h3>
+					</header>
+					<p>Dialogs pop up above everything else.</p>
+					<footer>
+						<button
+							onclick="
+								document
+									.getElementById('Example_Dialog')
+									.close()
+							">
+							Close
+						</button>
+					</footer>
+				</dialog>
+			</section>
+			<section id="Themes">
+				<h2>Themes</h2>
+				<hr />
+				<h3>Two ways to Theme</h3>
+				<div class="ri-grid">
+					<article
+						data-ri-color="purple"
+						class="ri-rounded-max ri-theme-light ri-font-serif">
+						<header>
+							<strong> Editing these directly in ri.css </strong>
+							<br />
+							<small class="ri-font-code">
+								Or editing these variable in your style sheet
+								and editing them
+							</small>
+						</header>
+						<div>
+							<pre
+								class="ri-theme-dark ri-rounded-min"><code>:root {
+	--ri-border-size: 2px;
+	--ri-border-radius: 0.5rem;
+	--ri-color: #22b;
+	--ri-spacing: 1rem;
+}</code></pre>
+						</div>
+					</article>
+					<article
+						data-ri-color="lime"
+						class="ri-rounded-none ri-theme-dark">
+						<header class="ri-font-code">
+							<strong>Editing themes per element</strong>
+							<br />
+							<small class="ri-font-serif"
+								>By using these attributes and classes</small
+							>
+						</header>
+						<div class="ri-rounded-max ri-theme-light">
+							<em>Via Attribute</em>
+							<pre><code>&lt;tag data-ri-color="HTML Color Name"&gt;&lt;/tag&gt;
+</code></pre>
+							<pre><code>&lt;tag data-ri-hue="Number from 0 to 360"&gt;&lt;/tag&gt;
+</code></pre>
+							<em>Via Classes</em>
+							<br />
+							<code>ri-theme-dark</code>
+							<code>ri-theme-light</code>
+							<br />
+							<code>ri-font-code</code>
+							<code>ri-font-sans</code>
+							<code>ri-font-serif</code>
+							<br />
+							<code>ri-rounded-none</code>
+							<code>ri-rounded-min</code>
+							<code>ri-rounded-max</code>
+							<br />
+							<code>ri-width-full</code>
+						</div>
+					</article>
+				</div>
+				<blockquote data-ri-hue="80">
+					<p>
+						Attributes allows you to dynamically theme your elements
+						to your liking, while keeping the css lightweight.
+						<br />
+						Mix and Match to get exactly what you want.
+					</p>
+				</blockquote>
+			</section>
+		</main>
+		<footer align="center">
+			<small>ricss &copy; 2026 Fullname - MIT License</small>
+		</footer>
+		<a role="button" href="#Top" id="toTop" class="ri-secondary">
+			Back to Top
+		</a>
+
+		<script>
+			const PageBody = document.querySelector('body')
+			function toggleWidth() {
+				PageBody.classList.toggle('ri-width-full')
+			}
+			function toggleRound() {
+				const roundedValue = document.theme_control.round.value
+				PageBody.classList.forEach(item => {
+					if (item.includes('ri-rounded')) {
+						PageBody.classList.remove(item.toString())
+					}
+				})
+
+				switch (roundedValue) {
+					case '1':
+						PageBody.classList.toggle('ri-rounded-min')
+						break
+					case '2':
+						PageBody.classList.toggle('ri-rounded-max')
+						break
+					default:
+						PageBody.classList.toggle('ri-rounded-none')
+						break
+				}
+			}
+			function toggleHue() {
+				const hue = document.theme_control.hue.value
+				PageBody.setAttribute('data-ri-hue', hue)
+			}
+			function toggleMode() {
+				const theme = document.theme_control.mode.value
+				PageBody.classList.forEach(item => {
+					if (item.includes('ri-theme')) {
+						PageBody.classList.remove(item.toString())
+					}
+				})
+				switch (theme) {
+					case '1':
+						PageBody.classList.toggle('ri-theme-dark')
+						break
+					case '2':
+						PageBody.classList.toggle('ri-theme-light')
+						break
+					default:
+						break
+				}
+			}
+			function toggleFont() {
+				const font = document.theme_control.font.value
+				PageBody.classList.forEach(item => {
+					if (item.includes('ri-font')) {
+						PageBody.classList.remove(item.toString())
+					}
+				})
+				switch (font) {
+					case '1':
+						PageBody.classList.toggle('ri-font-serif')
+						break
+					case '2':
+						PageBody.classList.toggle('ri-font-code')
+						break
+					default:
+						break
+				}
+			}
+		</script>
+	</body>
+</html>
