@@ -8,7 +8,19 @@ project.
 
 Made with Pure CSS (It's more than good nowadays)
 
-[See riCss in action](https://israjatiangar.github.io/ricss/)
+[See ricss in action](https://israjatiangar.github.io/ricss/)
+
+## How to Use
+
+- **Via CDN**\
+  Add this to the `<head>` of your HTML file
+  ```html
+  <link
+  	rel="stylesheet"
+  	href="https://cdn.jsdelivr.net/gh/israjatiangar/ricss@main/css/ri.min.css" />
+  ```
+- **Via Download**\
+  [Download ricss](https://github.com/israjatiangar/ricss/archive/refs/heads/main.zip)
 
 ## Features
 

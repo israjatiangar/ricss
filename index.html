@@ -13,6 +13,9 @@
 
 		<link rel="stylesheet" href="css/ri.css" />
 		<style>
+			.select-all {
+				user-select: all;
+			}
 			#toTop {
 				transition-property: all;
 				position: fixed;
@@ -39,14 +42,14 @@
 	<body id="Top">
 		<header align="center" class="sticky">
 			<nav>
-				<strong><a href=""> 🍚 Ri CSS </a> </strong>
+				<strong>🍚 Ri CSS</strong>
 				<menu>
 					<li>
 						<a
 							href="https://github.com/israjatiangar/ricss"
-							role="button"
-							>Github</a
-						>
+							role="button">
+							Github
+						</a>
 					</li>
 				</menu>
 			</nav>
@@ -54,6 +57,17 @@
 		<main>
 			<section>
 				<h2>How to use</h2>
+				<strong>Via CDN</strong>
+				<p>
+					Add this in the <code>&lt;head&gt;</code> of your HTML file:
+				</p>
+				<pre
+					class="select-all"><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/israjatiangar/ricss@main/css/ri.min.css"/&gt;</code></pre>
+				<strong>Via Download</strong>
+				<a
+					href="https://github.com/israjatiangar/ricss/archive/refs/heads/main.zip">
+					Download ricss
+				</a>
 			</section>
 
 			<section class="Chapters">
@@ -227,10 +241,20 @@
 						<legend>This is a Legend</legend>
 						<label for="name">
 							Input within a Label
-							<input id="name" type="text" name="name" required />
+							<input
+								id="name"
+								type="text"
+								name="name"
+								placeholder="Shah Rukh Khan"
+								required />
 						</label>
 						<label for="pass"> Separate label & input: </label>
-						<input id="pass" type="password" name="pass" required />
+						<input
+							id="pass"
+							type="passeword"
+							name="pass"
+							placeholder="password@1234"
+							required />
 
 						<label> Select </label>
 						<select>
@@ -243,11 +267,11 @@
 
 						<fieldset>
 							<legend>Pick a Fruit</legend>
-							<label for="">
+							<label>
 								<input name="check" type="checkbox" />
 								Pineapples are Good
 							</label>
-							<label for="">
+							<label>
 								<input name="check" type="checkbox" />
 								Bananas are Bad
 							</label>
