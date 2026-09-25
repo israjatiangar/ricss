@@ -11,7 +11,7 @@
 			name="description"
 			content="A Demo for ricss (A quasi classless css)" />
 
-		<link rel="stylesheet" href="css/ri.css" />
+		<link rel="stylesheet" href="css/ri.min.css" />
 		<style>
 			.select-all {
 				user-select: all;
@@ -251,7 +251,7 @@
 						<label for="pass"> Separate label & input: </label>
 						<input
 							id="pass"
-							type="passeword"
+							type="password"
 							name="pass"
 							placeholder="password@1234"
 							required />
@@ -292,11 +292,24 @@
 								No
 							</label>
 						</fieldset>
+						<fieldset>
+							<legend>Input Group</legend>
+							<label for="">
+								Div with class of ri-form-group
+							</label>
+							<div class="ri-form-group">
+								<input type="text" placeholder="I love Green" />
+								<button class="ri-button-secondary">
+									Nope
+								</button>
+								<button>Yep</button>
+							</div>
+						</fieldset>
 
 						<small>Click reset to remove validation</small>
 						<div>
 							<button>Submit</button>
-							<button class="ri-secondary" type="reset">
+							<button class="ri-button-secondary" type="reset">
 								Reset
 							</button>
 						</div>
@@ -305,8 +318,8 @@
 					<a href="" role="button">
 						This is a link with role="button"
 					</a>
-					<button type="button" class="ri-secondary">
-						class of ri-secondary
+					<button type="button" class="ri-button-secondary">
+						class of ri-button-secondary
 					</button>
 				</form>
 				<div>
@@ -491,12 +504,16 @@
 </code></pre>
 							<em>Via Classes</em>
 							<br />
+							<code>ri-button-secondary</code>
+							<br />
 							<code>ri-theme-dark</code>
 							<code>ri-theme-light</code>
 							<br />
 							<code>ri-font-code</code>
 							<code>ri-font-sans</code>
 							<code>ri-font-serif</code>
+							<br />
+							<code>ri-form-group</code>
 							<br />
 							<code>ri-rounded-none</code>
 							<code>ri-rounded-min</code>

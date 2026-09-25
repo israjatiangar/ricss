@@ -361,7 +361,7 @@ input:is([type='button'], [type='reset'], [type='submit']),
 	padding: var(--ri-spacing);
 	text-align: center;
 	text-decoration: none;
-	&.ri-secondary {
+	&.ri-button-secondary {
 		background: var(--ri-text);
 		&:hover {
 			background: var(--ri-text-muted);
@@ -470,6 +470,17 @@ progress {
 	}
 	&::-moz-progress-bar {
 		background: var(--ri-accent);
+	}
+}
+.ri-form-group {
+	display: flex;
+	> :not(:first-child) {
+		border-end-start-radius: 0;
+		border-start-start-radius: 0;
+	}
+	> :not(:last-child) {
+		border-start-end-radius: 0;
+		border-end-end-radius: 0;
 	}
 }
 .ri-font-code {

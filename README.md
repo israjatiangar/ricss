@@ -54,7 +54,7 @@ Hopefully it works for you too!
 ## Where this may go, Maybe...
 
 - Better pickers, checkboxes, and radio buttons
-- Input grouping (forms need work)
+- ~~Input grouping~~
 - Tooltips? Can't promise.
 
 ## Disclaimer
