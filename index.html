@@ -11,7 +11,7 @@
 			name="description"
 			content="A Demo for ricss (A quasi classless css)" />
 
-		<link rel="stylesheet" href="css/ri.min.css" />
+		<link rel="stylesheet" href="css/ri.css" />
 		<style>
 			.select-all {
 				user-select: all;
@@ -101,14 +101,14 @@
 				<form name="theme_control">
 					<fieldset>
 						<legend>Theme Controls</legend>
-						<label for="mode">Pick Theme</label>
-						<select name="mode" onchange="toggleMode()">
+						<label for="Mode">Pick Theme</label>
+						<select id="Mode" name="mode" onchange="toggleMode()">
 							<option value="0" selected>Auto</option>
 							<option value="1">Dark Mode</option>
 							<option value="2">Light Mode</option>
 						</select>
-						<label for="font">Pick a Font</label>
-						<select name="font" onchange="toggleFont()">
+						<label for="Font">Pick a Font</label>
+						<select id="Font" name="font" onchange="toggleFont()">
 							<option value="0" selected>Sans Serif</option>
 							<option value="1">Serif</option>
 							<option value="2">Monospace</option>
@@ -215,11 +215,13 @@
 				</ol>
 				<h3>Unordered List</h3>
 				<ul>
-					<li>Make a Tea</li>
-					<ul>
-						<li>With Ginger</li>
-						<li>Or Cardomom</li>
-					</ul>
+					<li>
+						Make a Tea
+						<ul>
+							<li>With Ginger</li>
+							<li>Or Cardomom</li>
+						</ul>
+					</li>
 					<li>Question Life</li>
 					<li>Go to Bed</li>
 				</ul>
@@ -256,8 +258,8 @@
 							placeholder="password@1234"
 							required />
 
-						<label> Select </label>
-						<select>
+						<label for="Select_Example"> Select </label>
+						<select id="Select_Example">
 							<option value="" default>Select One Option</option>
 
 							<option value="">Option A</option>
@@ -294,11 +296,14 @@
 						</fieldset>
 						<fieldset>
 							<legend>Input Group</legend>
-							<label for="">
+							<label for="Form_Group_Example">
 								Div with class of ri-form-group
 							</label>
 							<div class="ri-form-group">
-								<input type="text" placeholder="I love Green" />
+								<input
+									id="Form_Group_Example"
+									type="text"
+									placeholder="I love Green" />
 								<button class="ri-button-secondary">
 									Nope
 								</button>
